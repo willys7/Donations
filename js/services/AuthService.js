@@ -4,10 +4,11 @@
         authService.$inject = ['$http','AuthRepository'];
         function authService($http, AuthRepository){
             var authModel = {
-                apiKey:""
+                apiKey: "",
+                userKey: ""
             }
             var userAuthModel = {
-                username: "",
+                userName: "",
                 password: "",
                 campaignCode: "",
                 apiKey: authModel.apiKey
@@ -17,6 +18,8 @@
             var service = {
                 getApiToken: getApiToken,
                 setApiToken: setApiToken,
+                setUserToken: setUserToken,
+                setUser: setUser,
                 authModel: authModel,
                 userAuthModel: userAuthModel
             }
@@ -34,6 +37,16 @@
 
             function getApiToken(){
                 return service.authModel;
+            }
+
+            function setUserToken(key){
+                service.authModel.userKey = key;
+            }
+
+            function setUser(user){
+                service.userAuthModel.userName = user.userName,
+                service.userAuthModel.password = user.password,
+                service.userAuthModel.campaignCode = user.campaignCode
             }
         }
 })();
