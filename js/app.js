@@ -1,6 +1,6 @@
 (function() {
 'use strict';
-    angular.module("SuggestionBox", ['ngRoute']).config(config);
+    angular.module("Donations", ['ngRoute']).config(config);
     function config($routeProvider) {
         $routeProvider
         .when("/login", {
@@ -9,7 +9,7 @@
             controllerAs : "vmAuth"
         })
         .otherwise ({
-        redirectTo: '/home'
+        redirectTo: '/login'
         });
     };
 })();

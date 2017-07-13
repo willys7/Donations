@@ -10,6 +10,8 @@
         ];
 
         function authController($scope, AuthService){
-            
+            var vm = this;
+            AuthService.setApiToken();
+            vm.authModel = AuthService.getApiToken();
         }
 })();
