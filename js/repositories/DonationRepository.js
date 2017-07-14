@@ -16,11 +16,10 @@
                     "url": "http://841893c2.ngrok.io/OPPS.Web.API/api/Donor/GivingHistory",
                     "data" : {},
                     "params" : {
-                        'apiKey': authModel.apiKey,
                         'donorToken': authModel.userKey
                     },
                     "headers": {
-                        'Authorization': "Basic dmlhcm86cEBzc3dvcmQ="
+                        'Authorization': "Bearer " +  authModel.apiKey
                     }
                 }).then(function (data) {
                     return data;

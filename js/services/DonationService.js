@@ -10,9 +10,11 @@
 
             function getAllDonationsByUser(authModel){
                 var donations = {};
-                DonationRepository.getAllDonationsByUser(authModel).then(function(data){
-                    donations = data.data;
-                    return donations;
+                return DonationRepository.getAllDonationsByUser(authModel).then(
+                    function(data){
+                    donations = data.Data;
+                }).cath(function(err){
+                    console.log(err);
                 });
             }
         }

@@ -13,7 +13,6 @@
         function authController($scope, AuthService, $location){
             var vm = this;
             AuthService.setApiToken();
-            vm.authModel = AuthService.getKeys();
             
             vm.login = login;
             function login(){
