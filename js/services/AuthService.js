@@ -5,12 +5,13 @@
         function authService($http, AuthRepository){
             var authModel = {
                 apiKey: "",
-                userKey: ""
+                userKey: "",
+                status: 500
             }
             var userAuthModel = {
                 userName: "",
                 password: "",
-                compaignCode: "",
+                campaingCode: "",
                 apiKey: authModel.apiKey
             };
             
@@ -41,10 +42,14 @@
 
             function authenticateUser(){
                 var keyValue = "";
-                AuthRepository.authenticateUser().then(function(data){
-                    keyValue = data.data;
+                return AuthRepository.authenticateUser(service.userAuthModel).then(function(data){
+                    keyValue = data.data.Data.DonorToken;
                     service.authModel.userKey = keyValue;
+                    service.authModel.status = data.status;
+                }).catch(function(err){
+                    console.log(err);
                 });
+                
             }
 
             function setUserToken(key){
@@ -54,7 +59,7 @@
             function setUser(user){
                 service.userAuthModel.userName = user.userName,
                 service.userAuthModel.password = user.password,
-                service.userAuthModel.compaignCode = user.compaignCode,
+                service.userAuthModel.campaingCode = user.campaingCode,
                 service.userAuthModel.apiKey = service.authModel.apiKey
             }
         }

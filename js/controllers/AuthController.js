@@ -6,10 +6,11 @@
         //Nuevos servicios y repositorios
         authController.$inject = [
             "$scope",
-            "AuthService"
+            "AuthService",
+            "$location"
         ];
 
-        function authController($scope, AuthService){
+        function authController($scope, AuthService, $location){
             var vm = this;
             AuthService.setApiToken();
             vm.authModel = AuthService.getKeys();
@@ -17,21 +18,31 @@
             vm.login = login;
             function login(){
                 if(!vm.userName || vm.userName !== "redriver" ){
-                    return
+                    alert("Please enter your correct credentials");
+                    return 
                 }
                 if(!vm.password || vm.password !== "p@ssword" ){
+                    alert("Please enter your correct credentials");
                     return
                 }
-                if(!vm.compaingCode || vm.compaingCode !== "72001" ){
+                if(!vm.campaingCode || vm.campaingCode !== "72001" ){
+                    alert("Please enter your correct credentials");
                     return
                 }
                 vm.user = {
                     userName: vm.userName,
                     password: vm.password,
-                    compaingCode: vm.compaingCode
+                    campaingCode: vm.campaingCode
                 }
                 AuthService.setUser(vm.user);
-                AuthService.authenticateUser();
+                AuthService.authenticateUser().then(function(data){
+                    $location.path("/home");
+                    
+                }).catch(function(err){
+                    alert("Please enter your correct credentials");
+                });
+
+                
             }
 
         }

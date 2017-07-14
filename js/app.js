@@ -8,6 +8,11 @@
             templateUrl : "views/login.html",
             controllerAs : "vmAuth"
         })
+        .when("/home", {
+            controller: 'DonationController',
+            templateUrl : "views/home.html",
+            controllerAs : "vmDonation"
+        })
         .otherwise ({
         redirectTo: '/login'
         });

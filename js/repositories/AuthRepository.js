@@ -37,16 +37,16 @@
                 return $http({
 
                     "method": "GET", 
-                    "url": "http://841893c2.ngrok.io/OPPS.Web.API/api/Application/Authenticate",
+                    "url": "http://841893c2.ngrok.io/OPPS.Web.API/api/Donor/Authenticate",
                     "data" : {},
                     "params" : {
                         "username" : user.userName,
                         "password" : user.password,
-                        "campaignCode" : user.compaignCode,
-                        "apiKey" : user.apiKey
+                        "campaignCode" : user.campaingCode,
+                        "apiKey" : "QBnS2atww0KBvmJ6No4oyW2Y2D5+UuS6CKaV0ByJAAs="
                     },
                     "headers": {
-                        'Authorization': "Basic dmlhcm86cEBzc3dvcmQ="
+                        'Authorization': "Bearer " +  user.apiKey
                     }
                 }).then(function (data) {
                     return data;

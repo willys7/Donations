@@ -10,7 +10,8 @@
             "DonationService"
         ];
 
-        function authController($scope, AuthService, DonationService){
-        
+        function donationController($scope, AuthService, DonationService){
+            var vm = this;
+            vm.authModel = AuthService.getKeys();
         }
 })();
