@@ -10,9 +10,8 @@
             var userAuthModel = {
                 userName: "",
                 password: "",
-                campaignCode: "",
+                compaignCode: "",
                 apiKey: authModel.apiKey
-
             };
             
             var service = {
@@ -46,7 +45,8 @@
             function setUser(user){
                 service.userAuthModel.userName = user.userName,
                 service.userAuthModel.password = user.password,
-                service.userAuthModel.campaignCode = user.campaignCode
+                service.userAuthModel.compaignCode = user.compaignCode,
+                service.userAuthModel.apiKey = service.authModel.apiKey
             }
         }
 })();

@@ -15,7 +15,7 @@
             
             vm.login = login;
             function login(){
-                if(!vm.userName || vm.UserName !== "redriver" ){
+                if(!vm.userName || vm.userName !== "redriver" ){
                     return
                 }
                 if(!vm.password || vm.password !== "p@ssword" ){
@@ -29,7 +29,7 @@
                     password: vm.password,
                     compaingCode: vm.compaingCode
                 }
-                AuthService.setUser(user)
+                AuthService.setUser(vm.user)
             }
 
         }
