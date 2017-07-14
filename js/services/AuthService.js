@@ -15,9 +15,10 @@
             };
             
             var service = {
-                getApiToken: getApiToken,
+                getKeys: getKeys,
                 setApiToken: setApiToken,
                 setUserToken: setUserToken,
+                authenticateUser: authenticateUser,
                 setUser: setUser,
                 authModel: authModel,
                 userAuthModel: userAuthModel
@@ -34,8 +35,16 @@
                 
             }
 
-            function getApiToken(){
+            function getKeys(){
                 return service.authModel;
+            }
+
+            function authenticateUser(){
+                var keyValue = "";
+                AuthRepository.authenticateUser().then(function(data){
+                    keyValue = data.data;
+                    service.authModel.userKey = keyValue;
+                });
             }
 
             function setUserToken(key){

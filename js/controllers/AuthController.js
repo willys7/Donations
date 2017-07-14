@@ -12,6 +12,7 @@
         function authController($scope, AuthService){
             var vm = this;
             AuthService.setApiToken();
+            vm.authModel = AuthService.getKeys();
             
             vm.login = login;
             function login(){
@@ -29,7 +30,8 @@
                     password: vm.password,
                     compaingCode: vm.compaingCode
                 }
-                AuthService.setUser(vm.user)
+                AuthService.setUser(vm.user);
+                AuthService.authenticateUser();
             }
 
         }
