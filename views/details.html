@@ -1,16 +1,27 @@
 <div class="modal-content">
     <div class="modal-header">
-    <h5 class="modal-title">Modal title</h5>
+    <h1 class="modal-title">Transaction #{{vmDetails.donation.TransactionNumber}}</h1>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
     </div>
     <div class="modal-body">
-    <p>Modal body text goes here.</p>
+        <h1><span class="label label-default">Date Created</span></h1>
+        <h3>{{vmDetails.donation.DateCreated | date}}</h3>
+        <h1><span class="label label-default">Status</span></h1>
+        <h3>Submitted</h3>      
+        <h1><span class="label label-default">Payment type</span></h1>
+        <h3>Cash</h3>
+        <h1><span class="label label-default">Pledge</span></h1>
+        <h3>{{vmDetails.donation.PaymentAmount | currency}}</h3>
+        <h1><span class="label label-default">Total Annual Amount</span></h1>
+        <h3>{{vmDetails.donation.TotalValue | currency}}</h3>
+        <h1><span class="label label-default">Charity Details</span></h1>
+        <h3>{{vmDetails.donation.PaymentAmount | currency}} {{vmDetails.donation.CampaignName}}</h3>
+        
     </div>
     <div class="modal-footer">
-    <button type="button" class="btn btn-primary">Save changes</button>
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="vmDetails.cancel()">Close</button>
     </div>
 </div>
  
