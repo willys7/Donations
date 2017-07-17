@@ -1,4 +1,27 @@
 <div class="home">
-    Hola
-    {{vmDonation.authModel}}
+    <table class="table">
+      <thead class="thead-inverse">
+        <tr>
+          <th>Date</th>
+          <th>Campaing</th>
+          <th>Pledge</th>
+          <th>Payment Type</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="donation in vmDonation.donations">    
+          <td>{{donation.DateCreated | date}}</td>
+          <td>{{ donation.CampaignName }}</td>
+          <td>{{ donation.TransactionNumber }}</td>
+          <td>Cash</td>
+          <td>{{ donation.PaymentAmount | currency }}</td>
+          <td>
+              <button type="button" class="btn btn-default btn-xs" ng-click="vmDonation.donationDetails(donation)">
+                  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+              </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 </div>

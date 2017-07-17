@@ -7,21 +7,41 @@
         donationController.$inject = [
             "$scope",
             "AuthService",
-            "DonationService"
+            "DonationService",
+            '$uibModal'
         ];
 
-        function donationController($scope, AuthService, DonationService){
+        function donationController($scope, AuthService, DonationService, $uibModal){
             var vm = this;
-            vm.authModel = AuthService.getKeys();
 
             vm.donations = {};
-            function getDonations(authModel){
-                DonationService.getAllDonationsByUser(authModel).then(function(data){
-                    vm.donations = data.Data;
-                }).catch(function(err){
-                    alert("Problems wirh the login")
+            
+            
+            DonationService.getAllDonationsByUser().then(function(data){
+                vm.donations = data;
+                console.log(vm.donations);
+            }).catch(function(err){
+                console.log(err);
+            });
+
+            vm.donationDetails = donationDetails;
+
+            function donationDetails(donation){
+                
+                return $uibModal.open({
+                    controller: 'DetailsController',
+                    controllerAs: 'vmDetails',
+                    templateUrl: 'views/details.html',
+                    resolve:{
+                        donationDetails: function(){
+                            return donation
+                        }
+                    }
                 });
+                
             }
+            
+            
 
         }
 })();

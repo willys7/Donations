@@ -1,6 +1,6 @@
 (function() {
 'use strict';
-    angular.module("Donations", ['ngRoute']).config(config);
+    angular.module("Donations", ['ngRoute','ui.bootstrap', 'ui.bootstrap.tpls']).config(config);
     function config($routeProvider) {
         $routeProvider
         .when("/login", {
