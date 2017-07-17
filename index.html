@@ -8,6 +8,8 @@
         <script src="https://code.angularjs.org/1.2.28/angular-route.min.js" type="text/javascript"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </head>
     <body ng-app="Donations">
         <div ng-view></div>
@@ -17,14 +19,17 @@
 
         <!-- Controllers -->
         <script type="text/javascript" src="js/controllers/AuthController.js"></script>
-        <script type="text/javascript" src="js/controllers/DonationContoller.js"></script>
+        <script type="text/javascript" src="js/controllers/HomeContoller.js"></script>
         <script type="text/javascript" src="js/controllers/DetailsController.js"></script>
+        <script type="text/javascript" src="js/controllers/DonationController.js"></script>
         <!-- Services -->
         <script type="text/javascript" src="js/services/AuthService.js"></script>
         <script type="text/javascript" src="js/services/DonationService.js"></script>
+        <script type="text/javascript" src="js/services/PaymentService.js"></script>
         <!-- Repositories -->
         <script type="text/javascript" src="js/repositories/AuthRepository.js"></script>
         <script type="text/javascript" src="js/repositories/DonationRepository.js"></script>
+        <script type="text/javascript" src="js/repositories/PaymentRepository.js"></script>
 
     </body>
 </html>

@@ -2,16 +2,17 @@
 'use strict';
 
 	angular.module('Donations')
-        .controller('DonationController',donationController)
+        .controller('HomeController',homeController)
         //Nuevos servicios y repositorios
-        donationController.$inject = [
+        homeController.$inject = [
             "$scope",
             "AuthService",
             "DonationService",
-            '$uibModal'
+            '$uibModal',
+            '$location'
         ];
 
-        function donationController($scope, AuthService, DonationService, $uibModal){
+        function homeController($scope, AuthService, DonationService, $uibModal, $location){
             var vm = this;
 
             vm.donations = {};
@@ -25,7 +26,7 @@
             });
 
             vm.donationDetails = donationDetails;
-
+            vm.addDonation = addDonation;
             function donationDetails(donation){
                 
                 return $uibModal.open({
@@ -39,6 +40,10 @@
                     }
                 });
                 
+            }
+
+            function addDonation(){
+                $location.path("/AddDonation");
             }
             
             

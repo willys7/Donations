@@ -9,8 +9,13 @@
             controllerAs : "vmAuth"
         })
         .when("/home", {
-            controller: 'DonationController',
+            controller: 'HomeController',
             templateUrl : "views/home.html",
+            controllerAs : "vmHome"
+        })
+        .when("/AddDonation", {
+            controller: 'DonationController',
+            templateUrl : "views/addDonation.html",
             controllerAs : "vmDonation"
         })
         .otherwise ({

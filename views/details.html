@@ -1,23 +1,23 @@
 <div class="modal-content">
     <div class="modal-header">
-    <h1 class="modal-title">Transaction #{{vmDetails.donation.TransactionNumber}}</h1>
+    <h2 class="modal-title">Transaction #{{vmDetails.donation.TransactionNumber}}</h2>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
     </div>
     <div class="modal-body">
-        <h1><span class="label label-default">Date Created</span></h1>
-        <h3>{{vmDetails.donation.DateCreated | date}}</h3>
-        <h1><span class="label label-default">Status</span></h1>
-        <h3>Submitted</h3>      
-        <h1><span class="label label-default">Payment type</span></h1>
-        <h3>Cash</h3>
-        <h1><span class="label label-default">Pledge</span></h1>
-        <h3>{{vmDetails.donation.PaymentAmount | currency}}</h3>
-        <h1><span class="label label-default">Total Annual Amount</span></h1>
-        <h3>{{vmDetails.donation.TotalValue | currency}}</h3>
-        <h1><span class="label label-default">Charity Details</span></h1>
-        <h3>{{vmDetails.donation.PaymentAmount | currency}} {{vmDetails.donation.CampaignName}}</h3>
+        <h3><span class="label label-primary">Date Created</span></h3>
+        <h5>{{vmDetails.donation.DateCreated | date}}</h5>
+        <h3><span class="label label-primary">Status</span></h3>
+        <h5>Submitted</h5>      
+        <h3><span class="label label-primary">Payment type</span></h3>
+        <h5>Cash</h5>
+        <h3><span class="label label-primary">Pledge</span></h3>
+        <h5>{{vmDetails.donation.PaymentAmount | currency}}</h5>
+        <h3><span class="label label-primary">Total Annual Amount</span></h3>
+        <h5>{{vmDetails.donation.TotalValue | currency}}</h5>
+        <h3><span class="label label-primary">Charity Details</span></h3>
+        <h5>{{vmDetails.donation.PaymentAmount | currency}} {{vmDetails.donation.CampaignName}}</h5>
         
     </div>
     <div class="modal-footer">

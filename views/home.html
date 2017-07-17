@@ -3,6 +3,7 @@
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-tittle">Giving History</h3>
+                <button type="button" class="btn btn-success" ng-click="vmHome.addDonation()">Add Donation</button>
             </div>
             <div class="panel-body">
                     <table class="table table-striped">
@@ -16,14 +17,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="donation in vmDonation.donations">    
+                        <tr ng-repeat="donation in vmHome.donations">    
                         <td>{{donation.DateCreated | date}}</td>
                         <td>{{ donation.CampaignName }}</td>
                         <td>{{ donation.TransactionNumber }}</td>
                         <td>Cash</td>
                         <td>{{ donation.PaymentAmount | currency }}</td>
                         <td>
-                            <button type="button" class="btn btn-default btn-xs" ng-click="vmDonation.donationDetails(donation)">
+                            <button type="button" class="btn btn-default btn-xs" ng-click="vmHome.donationDetails(donation)">
                                 <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                             </button>
                         </td>
