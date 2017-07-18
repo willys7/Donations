@@ -4,9 +4,12 @@
         donationService.$inject = ['$http','DonationRepository'];
         function donationService($http, DonationRepository){
             var donations = {};
+            var orgs = {};
             var service = {
-                getAllDonationsByUser:  getAllDonationsByUser,
-                donations: donations
+                getAllDonationsByUser :  getAllDonationsByUser,
+                getOrganizations : getOrganizations,
+                donations : donations,
+                orgs : orgs
             }
             
             return service
@@ -20,6 +23,15 @@
                 });
 
                 
+            }
+
+            function getOrganizations(){
+                return DonationRepository.getOrganizations().then(function(data){
+                    service.orgs = data.data.Data;
+                    return service.orgs;
+                }).catch(function(err){
+                    console.log(err);
+                });
             }
 
             

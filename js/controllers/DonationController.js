@@ -19,6 +19,7 @@
             vm.countries = [];
             vm.states = [];
             vm.year = [];
+            vm.orgs = {};
             for (var i=2017; i<=2025; i++){
                 vm.year.push(i);
             }
@@ -31,6 +32,7 @@
             getPaymentLabels();
             getCountries();
             getStates();
+            getOrganizations();
             vm.change = change;
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
@@ -63,7 +65,6 @@
             function getCountries(){
                 CountryService.getCountries().then(function(data){
                     vm.countries = data;
-                    console.log(data);
                 }).catch(function(err){
                     console.log(err);
                 });
@@ -72,13 +73,21 @@
             function getStates(){
                 CountryService.getUSStates().then(function(data){
                     vm.states = data;
-                    console.log(data);
                 }).catch(function(err){
                     console.log(err);
                 });
             }
             function change(){
                 console.log(vm.country);
+            }
+
+            function getOrganizations(){
+                DonationService.getOrganizations().then(function(data){
+                    vm.orgs = data;
+                    console.log(vm.orgs);
+                }).catch(function(err){
+                    console.log(err);
+                })
             }
         }
 })();
