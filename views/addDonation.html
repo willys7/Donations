@@ -65,12 +65,37 @@
                         <div id="collapse1" class="panel-collapse collapse in">
                           <div class="panel-body">
                             <div class="card-type">
-                              <span class="label label-primary">Card Type</span>
+                              <h4><span class="label label-primary">Card Type</span></h4>
                               <select class="selectpicker">
-                                <option ng-repeat="value in vmDonation.paymentLabels.CreditCardTypeList">
-                                    
+                                <option ng-repeat="value in vmDonation.creditCardValues">
+                                  {{value}}
                                 </option>
                               </select>
+                            </div>
+                            <div class="card">
+                              <h4><span class="label label-primary">Card Number</span></h4> <input type="text">
+                            </div>
+                            <div class="card-verification ">
+                              <h4><span class="label label-primary">Card Verification Number</span></h4> <input type="text"><br>
+                            </div>
+                            <div class="card-name">
+                              <h4><span class="label label-primary">Name On Card</span></h4> <input type="text"><br>
+                            </div>
+                            <div class="date">
+                              <h4><span class="label label-primary">Expiration Date</span></h4>
+                              <select class="selectpicker">
+                                <option ng-repeat="value in vmDonation.month">
+                                  {{value}}
+                                </option>
+                              </select>
+                              <select class="selectpicker">
+                                <option ng-repeat="value in vmDonation.year">
+                                  {{value}}
+                                </option>
+                              </select>
+                            </div>
+                            <div class="email">
+                                <h4><span class="label label-primary">Contact Email Address</span></h4> <input type="text"><br>
                             </div>
                           </div>
                         </div>
