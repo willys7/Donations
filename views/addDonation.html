@@ -110,8 +110,51 @@
                       </div>
                       <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body">
+                          <div class="country">
+                            <h4><span class="label label-primary">Country</span></h4>
+                            <select class="selectpicker" ng-model="vmDonation.country" ng-change="vmDonation.change()">
+                              <option ng-repeat="value in vmDonation.countries">{{value.CountryName}}</option>
+                            </select>
+                          </div>
+                          <div class="address">
+                            <h4><span class="label label-primary">Address 1</span></h4>
+                            <input type="text"><br>
+                          </div>
+                          <div class="address-2">
+                            <h4><span class="label label-primary">Address 2</span></h4>
+                            <input type="text"><br>
+                          </div>
+                          <div class="city">
+                            <h4><span class="label label-primary">City</span></h4>
+                            <input type="text"><br>
+                          </div>
+                          <div class="state" ng-if="vmDonation.country == 'United States'">
+                            <h4><span class="label label-primary">State</span></h4>
+                            <select class="selectpicker">
+                              <option ng-repeat="value in vmDonation.states">
+                                {{value.Name}}
+                              </option>
+                            </select>
+                          </div>
+                          <div class="zip" ng-if="vmDonation.country == 'United States'">
+                            <h4><span class="label label-primary">Zip Code</span></h4>
+                            <div class="col-lg-2"> 
+                              <input type="text" placeholder="Zip Code">
+                              <input type="text" placeholder="Zip Code Extension">
+                            </div>
+                          </div>
+                          <div class="province" ng-if="vmDonation.country != 'United States'">
+                            <h4><span class="label label-primary">Province</span></h4>
+                            <input type="text"><br>
+                          </div>
+                          <div class="postal" ng-if="vmDonation.country != 'United States'">
+                            <h4><span class="label label-primary">Postal Code</span></h4>
+                            <input type="text"><br>
+                          </div>
                         </div>
                       </div>
+                    </div>
+                    <div class="form-group row panel panel-primary">
                     </div>
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">

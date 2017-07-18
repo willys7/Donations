@@ -17,6 +17,11 @@
             function getCountries(){
                 return CountryRepository.getCountries().then(function(data){
                     service.countries = data.data.Data;
+                    for(var i=0; i<service.countries; i++){
+                        var name = service.countries[i].CountryName;
+                        name = name.replace(" ", "")
+                        service.countries[i].CountryName = name;
+                    }
                     console.log(data);
                     return service.countries;
                 }).catch(function(err){
@@ -26,7 +31,7 @@
 
             function getUSStates(){
                 return CountryRepository.getUSStates().then(function(data){
-                    service.states = data;
+                    service.states = data.data.Data;
                     console.log(data);
                     return service.states;
                 }).catch(function(err){

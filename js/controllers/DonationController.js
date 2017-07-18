@@ -14,8 +14,10 @@
 
         function donationController($scope, AuthService, CountryService, DonationService, PaymentService){
             var vm = this;
-            vm.paymentLabels = {}
-            vm.amountOptions = {}
+            vm.paymentLabels = {};
+            vm.amountOptions = {};
+            vm.countries = [];
+            vm.states = [];
             vm.year = [];
             for (var i=2017; i<=2025; i++){
                 vm.year.push(i);
@@ -29,6 +31,7 @@
             getPaymentLabels();
             getCountries();
             getStates();
+            vm.change = change;
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
@@ -59,6 +62,7 @@
 
             function getCountries(){
                 CountryService.getCountries().then(function(data){
+                    vm.countries = data;
                     console.log(data);
                 }).catch(function(err){
                     console.log(err);
@@ -67,10 +71,14 @@
 
             function getStates(){
                 CountryService.getUSStates().then(function(data){
+                    vm.states = data;
                     console.log(data);
                 }).catch(function(err){
                     console.log(err);
                 });
+            }
+            function change(){
+                console.log(vm.country);
             }
         }
 })();
