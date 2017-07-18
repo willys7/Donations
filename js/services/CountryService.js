@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 	angular.module('Donations').factory('CountryService',countryService);
-        countryService.$inject = ['$http','PaymentRepository'];
+        countryService.$inject = ['$http','CountryRepository'];
         function countryService($http, CountryRepository){
             var countries = {};
             var states = {};
@@ -16,7 +16,7 @@
 
             function getCountries(){
                 return CountryRepository.getCountries().then(function(data){
-                    service.countries = data;
+                    service.countries = data.data.Data;
                     console.log(data);
                     return service.countries;
                 }).catch(function(err){

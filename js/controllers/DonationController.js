@@ -7,11 +7,12 @@
         donationController.$inject = [
             "$scope",
             "AuthService",
+            "CountryService",
             "DonationService",
             "PaymentService"
         ];
 
-        function donationController($scope, AuthService, DonationService, PaymentService){
+        function donationController($scope, AuthService, CountryService, DonationService, PaymentService){
             var vm = this;
             vm.paymentLabels = {}
             vm.amountOptions = {}
@@ -24,7 +25,10 @@
                 vm.month.push(i);
             }
             
+
             getPaymentLabels();
+            getCountries();
+            getStates();
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
@@ -48,8 +52,22 @@
                             vm.creditCardValues.push("Diners Club")
                         }
                     }
+                }).catch(function(err){
+                    console.log(err);
+                });
+            }
+
+            function getCountries(){
+                CountryService.getCountries().then(function(data){
                     console.log(data);
-                    console.log(vm.creditCardValues)
+                }).catch(function(err){
+                    console.log(err);
+                });
+            }
+
+            function getStates(){
+                CountryService.getUSStates().then(function(data){
+                    console.log(data);
                 }).catch(function(err){
                     console.log(err);
                 });
