@@ -33,6 +33,7 @@
             getCountries();
             getStates();
             getOrganizations();
+            vm.paymentDetails = DonationService.getPaymentConfig();
             vm.change = change;
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
@@ -78,7 +79,7 @@
                 });
             }
             function change(){
-                console.log(vm.country);
+                console.log(vm.paymentDetails.cardNumber);
             }
 
             function getOrganizations(){

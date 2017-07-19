@@ -6,13 +6,13 @@
             var donations = {};
             var orgs = {};
             var paymentConfig = {
-                Id : 0,
-                cardName : "",
-                cardNumber : 0,
-                formattedExpiryDate : "",
-                contactEmail : "",
-                cardVrfy : 0,
-                pledgeAmount : 0
+                Id : null,
+                cardName : null,
+                cardNumber : null,
+                formattedExpiryDate : null,
+                contactEmail : null,
+                cardVrfy : null,
+                pledgeAmount : null
             };
             var agencyDetails = {
                 DesignationEntityType : "",
@@ -29,7 +29,7 @@
                 AddonTotalList: [], //None
                 AddOnTotalValue: 0, //No value
                 CampaignId: "c4f85b7e-54eb-4194-bcb1-b0a072217e09",
-                CustomField1: paymentConfig.cardType.Id,
+                CustomField1: paymentConfig.Id,
                 CustomField2: paymentConfig.cardName,
                 CustomField3: paymentConfig.cardNumber,
                 CustomField4: paymentConfig.formattedExpiryDate,
@@ -58,7 +58,7 @@
                 IsImpersonated: false,
                 NegativeDesignation: "", //None
                 Payment: { /*Empty because cash doesn't accept billing data*/ },
-                PaymentAmount: pledgeAmount,
+                PaymentAmount: paymentConfig.pledgeAmount,
                 PaymentAmountType: 1,
                 PaymentIncreaseAmount: 0,
                 PaymentIncreaseAmountType: 1,
@@ -73,7 +73,10 @@
                 donations : donations,
                 orgs : orgs,
                 paymentConfig : paymentConfig,
-                postDonation : postDonation
+                agencyDetails : agencyDetails,
+                postDonation : postDonation,
+                getPaymentConfig : getPaymentConfig,
+                setPaymentConfig : setPaymentConfig
             };
             
             return service
@@ -96,6 +99,20 @@
                 }).catch(function(err){
                     console.log(err);
                 });
+            }
+
+            function getPaymentConfig(){
+                return service.paymentConfig;
+            }
+
+            function setPaymentConfig(payment){
+                service.paymentConfig.Id = payment.Id;
+                service.paymentConfig.cardName = payment.cardName;
+                service.paymentConfig.cardNumber = payment.cardNumber;
+                service.paymentConfig.formattedExpiryDate = payment.formattedExpiryDate;
+                service.paymentConfig.contactEmail = payment.contactEmail;
+                service.paymentConfig.cardVrfy = payment.cardVrfy;
+                service.paymentConfig.pledgeAmount = payment.pledgeAmount;
             }
 
             

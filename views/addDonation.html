@@ -5,7 +5,7 @@
                 <h3 class="panel-tittle">Add Donation</h3>
             </div>
             <div class="panel-body">
-                <form ng-submit="">
+                <form name="donationForm" ng-submit="">
 
                     <div class="form-group row panel panel-primary" >
                         <div class="panel-heading">
@@ -24,10 +24,10 @@
                               <div class="amount row"> 
                                   <div class="radio" >
                                     <div class="col-lg-3" ng-repeat="value in vmDonation.amountOptions">
-                                      <label ng-if="value.AmountLabel != '' " >
+                                      <label ng-if="value.AmountLabel != '' " ng-model="vmDonation.amount" ng-change="vmDonation.change()">
                                         <input type="radio" name="optradio">{{value.AmountLabel}}   
                                       </label>
-                                      <label ng-if="value.AmountLabel == '' ">
+                                      <label ng-model="vmDonation.amount" ng-change="vmDonation.change()" ng-if="value.AmountLabel == '' ">
                                           <input type="radio" name="optradio"> $ <input type="text"><br>
                                       </label> 
                                     </div>
@@ -64,16 +64,18 @@
                         </div>
                         <div id="collapse1" class="panel-collapse collapse in">
                           <div class="panel-body">
-                            <div class="card-type">
+                            <div class="card-type" ng-class="{ 'has-error' : donationForm.cardType.$invalid && !donationForm.cardType.$pristine }">
                               <h4><span class="label label-primary">Card Type</span></h4>
-                              <select class="selectpicker">
+                              <select class="selectpicker" name="cardType" ng-model="vmDonation.paymentDetails.Id" required>
                                 <option ng-repeat="value in vmDonation.creditCardValues">
                                   {{value}}
                                 </option>
                               </select>
+                              <p ng-show="donationForm.cardType.$invalid && !donationForm.cardType.$pristine" class="help-block">Please select one option</p>
                             </div>
-                            <div class="card">
-                              <h4><span class="label label-primary">Card Number</span></h4> <input type="text">
+                            <div class="card" ng-class="{ 'has-error' : donationForm.cardNumber.$invalid && !donationForm.cardNumber.$pristine }">
+                              <h4><span class="label label-primary">Card Number</span></h4> <input type="text" name="cardNumber" ng-model="vmDonation.paymentDetails.cardNumber" required>
+                              <p ng-show="donationForm.cardNumber.$invalid && !donationForm.cardNumber.$pristine" class="help-block">The card number is required</p>
                             </div>
                             <div class="card-verification ">
                               <h4><span class="label label-primary">Card Verification Number</span></h4> <input type="text"><br>
