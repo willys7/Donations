@@ -20,6 +20,8 @@
             vm.states = [];
             vm.year = [];
             vm.orgs = {};
+            vm.validNumber = true;
+            vm.validName = true;
             vm.contact ={
                 country : null,
                 address : null,
@@ -48,6 +50,7 @@
             vm.paymentDetails = DonationService.getPaymentConfig();
             vm.change = change;
             vm.validateCardNumber = validateCardNumber;
+            vm.validatecardName = validatecardName;
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
@@ -105,7 +108,6 @@
                 })
             }
             function validateCardNumber(){
-                vm.validNumber = true;
                 if (vm.paymentDetails.Id == "Visa"){
                     vm.validNumber = /^4[0-9]{12}(?:[0-9]{3})?$/.test(vm.paymentDetails.cardNumber);
                 }
@@ -121,8 +123,19 @@
                 if(vm.paymentDetails.Id == "Diners Club"){
                     vm.validNumber = /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/.test(vm.paymentDetails.cardNumber);
                 }
-                else{
+                if(vm.paymentDetails.cardNumber == null || vm.paymentDetails.cardNumber == "" || vm.paymentDetails.cardNumber == 0){
                     vm.validNumber = true
+                }
+            }
+
+            function validatecardName(){
+                if(!vm.paymentDetails.cardName.includes(" ")){
+                    vm.validName = false;
+                }else{
+                    vm.validName = true;
+                }
+                if(vm.paymentDetails.cardName == null || vm.paymentDetails.cardName == ""){
+                    vm.validName = true;
                 }
             }
         }

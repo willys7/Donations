@@ -66,7 +66,7 @@
                           <div class="panel-body">
                             <div class="card-type" ng-class="{ 'has-error' : donationForm.cardType.$invalid && !donationForm.cardType.$pristine }">
                               <h4><span class="label label-primary">Card Type</span></h4>
-                              <select class="selectpicker" name="cardType" ng-model="vmDonation.paymentDetails.Id" required>
+                              <select class="selectpicker" name="cardType" ng-model="vmDonation.paymentDetails.Id" ng-change="vmDonation.validateCardNumber()" required>
                                 <option ng-repeat="value in vmDonation.creditCardValues">{{value}}</option>
                               </select>
                               <p ng-show="donationForm.cardType.$invalid && !donationForm.cardType.$pristine" class="help-block">Please select one option</p>
@@ -81,9 +81,10 @@
                               <p ng-show="donationForm.cardVrfy.$invalid && !donationForm.cardVrfy.$pristine" class="help-block">Invalid CSV</p>
                               
                             </div>
-                            <div class="card-name" ng-class="{ 'has-error' : donationForm.cardName.$invalid && !donationForm.cardName.$pristine }">
-                              <h4><span class="label label-primary">Name On Card</span></h4> <input type="text" name="cardName" ng-model="vmDonation.paymentDetails.cardName" ng-change="vmDonations.change()" required><br>
+                            <div class="card-name" ng-class="{ 'has-error' : (donationForm.cardName.$invalid && !donationForm.cardName.$pristine)}">
+                              <h4><span class="label label-primary">Name On Card</span></h4> <input type="text" name="cardName" ng-model="vmDonation.paymentDetails.cardName" ng-blur="vmDonation.validatecardName()" required><br>
                               <p ng-show="donationForm.cardName.$invalid && !donationForm.cardName.$pristine" class="help-block">The card name is required</p>
+                              <p ng-show="!vmDonation.validName">Invalid card name</p>
                             </div>
                             <div class="date" ng-class="{ 'has-error' : (donationForm.cardMonth.$invalid && !donationForm.cardMonth.$pristine) || (donationForm.cardYear.$invalid && !donationForm.cardYear.$pristine)}">
                               <h4><span class="label label-primary">Expiration Date</span></h4>
@@ -155,12 +156,12 @@
                               
                             </div>
                           </div>
-                          <div class="province" ng-if="vmDonation.country != 'United States'" ng-class="{ 'has-error' : donationForm.province.$invalid && !donationForm.province.$pristine }">
+                          <div class="province" ng-if="vmDonation.contact.country != 'United States'" ng-class="{ 'has-error' : donationForm.province.$invalid && !donationForm.province.$pristine }">
                             <h4><span class="label label-primary">Province</span></h4>
                             <input type="text" name="province" ng-model="vmDonation.contact.province" required><br>
                             <p ng-show="donationForm.province.$invalid && !donationForm.province.$pristine" class="help-block">The province is required</p>
                           </div>
-                          <div class="postal" ng-if="vmDonation.country != 'United States'" ng-class="{ 'has-error' : donationForm.postalCode.$invalid && !donationForm.postalCode.$pristine }">
+                          <div class="postal" ng-if="vmDonation.contact.country != 'United States'" ng-class="{ 'has-error' : donationForm.postalCode.$invalid && !donationForm.postalCode.$pristine }">
                             <h4><span class="label label-primary">Postal Code</span></h4>
                             <input type="text" name="postalCode" ng-model="vmDonation.contact.postalCode" required><br>
                             <p ng-show="donationForm.postalCode.$invalid && !donationForm.postalCode.$pristine" class="help-block">The postal code is required</p>
