@@ -12,7 +12,9 @@
                 formattedExpiryDate : null,
                 contactEmail : null,
                 cardVrfy : null,
-                pledgeAmount : null
+                pledgeAmount : null,
+                month : null,
+                year : null
             };
             var agencyDetails = {
                 DesignationEntityType : "",

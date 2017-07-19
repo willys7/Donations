@@ -20,6 +20,18 @@
             vm.states = [];
             vm.year = [];
             vm.orgs = {};
+            vm.contact ={
+                country : null,
+                address : null,
+                address2 : null,
+                city : null,
+                state : null,
+                zipCode : null,
+                zipExtension : null,
+                province : null,
+                postalCode : null
+            };
+
             for (var i=2017; i<=2025; i++){
                 vm.year.push(i);
             }
@@ -35,6 +47,7 @@
             getOrganizations();
             vm.paymentDetails = DonationService.getPaymentConfig();
             vm.change = change;
+            vm.validateCardNumber = validateCardNumber;
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
@@ -57,6 +70,7 @@
                         if(creditCardList[i] == 5){
                             vm.creditCardValues.push("Diners Club")
                         }
+                        
                     }
                 }).catch(function(err){
                     console.log(err);
@@ -79,7 +93,7 @@
                 });
             }
             function change(){
-                console.log(vm.paymentDetails.cardNumber);
+                console.log(vm.paymentDetails);
             }
 
             function getOrganizations(){
@@ -89,6 +103,27 @@
                 }).catch(function(err){
                     console.log(err);
                 })
+            }
+            function validateCardNumber(){
+                vm.validNumber = true;
+                if (vm.paymentDetails.Id == "Visa"){
+                    vm.validNumber = /^4[0-9]{12}(?:[0-9]{3})?$/.test(vm.paymentDetails.cardNumber);
+                }
+                if(vm.paymentDetails.Id == "Master Card"){
+                    vm.validNumber = /^5[1-5][0-9]{14}$/.test(vm.paymentDetails.cardNumber);
+                }
+                if(vm.paymentDetails.Id == "American Express"){
+                    vm.validNumber = /^3[47][0-9]{13}$/.test(vm.paymentDetails.cardNumber);
+                }
+                if(vm.paymentDetails.Id == "Discover"){
+                    vm.validNumber = /^6(?:011|5[0-9]{2})[0-9]{12}$/.test(vm.paymentDetails.cardNumber);
+                }
+                if(vm.paymentDetails.Id == "Diners Club"){
+                    vm.validNumber = /^3(?:0[0-5]|[68][0-9])[0-9]{11}$/.test(vm.paymentDetails.cardNumber);
+                }
+                else{
+                    vm.validNumber = true
+                }
             }
         }
 })();
