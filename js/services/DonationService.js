@@ -80,6 +80,7 @@
                 postDonation : postDonation,
                 getPaymentConfig : getPaymentConfig,
                 setPaymentConfig : setPaymentConfig,
+                getAgencyDetails : getAgencyDetails,
                 setAgencyDetails : setAgencyDetails
             };
             
@@ -151,6 +152,10 @@
                 service.agencyDetails.MinimumTotalDonationForDesignation = agency.MinimumTotalDonationForDesignation;
                 service.agencyDetails.ProfileOrganizationNumber = agency.ProfileOrganizationNumber;
                 service.agencyDetails.StandardAccountCode = agency.StandardAccountCode;
+            }
+
+            function getAgencyDetails(){
+                return service.agencyDetails;
             }
 
             

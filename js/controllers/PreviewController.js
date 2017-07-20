@@ -15,6 +15,7 @@
 
         function previewController($scope, AuthService, CountryService, DonationService, PaymentService, $location){
             var vm = this;
-            
+            vm.payment = DonationService.getPaymentConfig();
+            vm.agency = DonationService.getAgencyDetails();
         }
 })();
