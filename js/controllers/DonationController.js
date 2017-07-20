@@ -22,6 +22,7 @@
             vm.orgs = {};
             vm.validNumber = true;
             vm.validName = true;
+            vm.validCustomPledge = true;
             vm.contact ={
                 country : null,
                 address : null,
@@ -51,10 +52,12 @@
             vm.change = change;
             vm.validateCardNumber = validateCardNumber;
             vm.validatecardName = validatecardName;
+            vm.validateCustomPledge = validateCustomPledge;
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
                     vm.amountOptions = data.AmountQuestions[0].AmountOptions;
+                    console.log(vm.amountOptions)
                     var creditCardList = data.CreditCardTypeList;
                     vm.creditCardValues = [];
                     for(var i=0; i<creditCardList.length; i++){
@@ -129,14 +132,41 @@
             }
 
             function validatecardName(){
-                if(!vm.paymentDetails.cardName.includes(" ")){
-                    vm.validName = false;
-                }else{
+                if(vm.paymentDetails.cardName == null){
                     vm.validName = true;
                 }
-                if(vm.paymentDetails.cardName == null || vm.paymentDetails.cardName == ""){
-                    vm.validName = true;
+                else{
+                    if(!vm.paymentDetails.cardName.includes(" ")){
+                        vm.validName = false;
+                    }else{
+                        vm.validName = true;
+                    }
+                    if(vm.paymentDetails.cardName == null || vm.paymentDetails.cardName == ""){
+                        vm.validName = true;
+                    }
                 }
             }
+
+            function validateCustomPledge(){
+                if(vm.paymentDetails.pledgeAmount == -7.922816251426434e+28){
+                    var minValue = vm.amountOptions[0].Amount;
+                    var value = Number(vm.paymentDetails.customPledgeAmount);
+                    if(isNaN(value)){
+                        vm.validCustomPledge = false;
+                    }
+                    if( value < 0 || value < minValue){
+                        vm.validCustomPledge = false;
+                    }
+                    else{
+                        vm.validCustomPledge = true;
+                    }
+                }
+                else{
+                    vm.validCustomPledge = true;
+                }
+               
+            }
+
+            
         }
 })();

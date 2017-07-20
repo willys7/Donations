@@ -13,6 +13,7 @@
                 contactEmail : null,
                 cardVrfy : null,
                 pledgeAmount : null,
+                customPledgeAmount : null,
                 month : null,
                 year : null
             };
