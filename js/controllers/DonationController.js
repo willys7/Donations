@@ -9,10 +9,11 @@
             "AuthService",
             "CountryService",
             "DonationService",
-            "PaymentService"
+            "PaymentService",
+            "$location"
         ];
 
-        function donationController($scope, AuthService, CountryService, DonationService, PaymentService){
+        function donationController($scope, AuthService, CountryService, DonationService, PaymentService, $location){
             var vm = this;
             vm.paymentLabels = {};
             vm.amountOptions = {};
@@ -35,7 +36,7 @@
                 postalCode : null
             };
 
-            for (var i=2017; i<=2025; i++){
+            for (var i=17; i<=25; i++){
                 vm.year.push(i);
             }
             vm.month = [];
@@ -53,6 +54,7 @@
             vm.validateCardNumber = validateCardNumber;
             vm.validatecardName = validatecardName;
             vm.validateCustomPledge = validateCustomPledge;
+            vm.submitForm = submitForm;
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
@@ -165,6 +167,12 @@
                     vm.validCustomPledge = true;
                 }
                
+            }
+
+            function submitForm(valid){
+                console.log(valid);
+                DonationService.setPaymentConfig(vm.paymentDetails)
+                $location.path("/agencies");
             }
 
             

@@ -5,7 +5,7 @@
                 <h3 class="panel-tittle">Add Donation</h3>
             </div>
             <div class="panel-body">
-                <form name="donationForm" ng-submit="">
+                <form name="donationForm" ng-submit="vmDonation.submitForm(donationForm.$valid)" novalidate>
 
                     <div class="form-group row panel panel-primary" >
                         <div class="panel-heading">

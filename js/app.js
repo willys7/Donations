@@ -18,6 +18,11 @@
             templateUrl : "views/addDonation.html",
             controllerAs : "vmDonation"
         })
+        .when("/agencies", {
+            controller: 'AgenciesController',
+            templateUrl : "views/agencies.html",
+            controllerAs : "vmaAgencies"
+        })
         .otherwise ({
         redirectTo: '/login'
         });

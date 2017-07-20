@@ -109,13 +109,36 @@
             }
 
             function setPaymentConfig(payment){
-                service.paymentConfig.Id = payment.Id;
+                if(payment.month > 0  && payment.month < 10 ){
+                    payment.month = "0" + payment.month
+                }
+                if(payment.Id == "Visa"){
+                    service.paymentConfig.Id = 1;
+                }
+                if(payment.Id == "Master Card"){
+                    service.paymentConfig.Id = 2;
+                }
+                if(payment.Id == "American Express"){
+                    service.paymentConfig.Id = 3;
+                }
+                if(payment.Id == "Discover"){
+                    service.paymentConfig.Id = 4;
+                }
+                if(payment.Id == "Diners Club"){
+                    service.paymentConfig.Id = 5;
+                }
+                if( payment.pledgeAmount == -7.922816251426434e+28){
+                    service.paymentConfig.pledgeAmount = payment.customPledgeAmount;
+                }
+                else{
+                    service.paymentConfig.pledgeAmount = payment.pledgeAmount;
+                }
                 service.paymentConfig.cardName = payment.cardName;
                 service.paymentConfig.cardNumber = payment.cardNumber;
-                service.paymentConfig.formattedExpiryDate = payment.formattedExpiryDate;
+                service.paymentConfig.formattedExpiryDate = payment.month + payment.year;
                 service.paymentConfig.contactEmail = payment.contactEmail;
                 service.paymentConfig.cardVrfy = payment.cardVrfy;
-                service.paymentConfig.pledgeAmount = payment.pledgeAmount;
+                service.paymentConfig.customPledgeAmount = payment.customPledgeAmount
             }
 
             

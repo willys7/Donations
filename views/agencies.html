@@ -1,0 +1,31 @@
+<div class="agencies">
+    <div class="container">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-tittle">Add Donation</h3>
+        </div>
+        <div class="panel-body">
+          <form name="donationForm" ng-submit="" novalidate>
+              <div class="form-group row panel panel-primary">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <spam >{{vmAgencies.orgs.PanelTitle}}</spam>
+                  </h4>
+                </div>
+                <div id="collapse1" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                    <div class="orgs">
+                      <div ng-repeat="org in vmAgencies.orgs.PanelItemList">
+                        <label>
+                          <input type="radio" name="optradio">{{org.Name}}   
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
