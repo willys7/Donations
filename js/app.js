@@ -21,7 +21,12 @@
         .when("/agencies", {
             controller: 'AgenciesController',
             templateUrl : "views/agencies.html",
-            controllerAs : "vmaAgencies"
+            controllerAs : "vmAgencies"
+        })
+        .when("/preview", {
+            controller: 'PreviewController',
+            templateUrl : "views/preview.html",
+            controllerAs : "vmPreview"
         })
         .otherwise ({
         redirectTo: '/login'

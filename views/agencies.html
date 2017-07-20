@@ -5,7 +5,7 @@
           <h3 class="panel-tittle">Add Donation</h3>
         </div>
         <div class="panel-body">
-          <form name="donationForm" ng-submit="" novalidate>
+          <form name="agencyForm" ng-submit="vmAgencies.submitForm(agencyForm.$valid)" novalidate>
               <div class="form-group row panel panel-primary">
                 <div class="panel-heading">
                   <h4 class="panel-title">
@@ -17,12 +17,18 @@
                     <div class="orgs">
                       <div ng-repeat="org in vmAgencies.orgs.PanelItemList">
                         <label>
-                          <input type="radio" name="optradio">{{org.Name}}   
+                          <input value="{{org}}" type="radio" name="optradio" ng-model="vmAgencies.currentOrg" ng-required="!vmAgencies.currentOrg">{{org.Name}}
                         </label>
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+              <div class="form-group row">
+                  <div class="col-lg-6">
+                      <button type="submit" class="btn btn-primary center-block">Next Step</button>
+                      <button ng-click="vmAgencies.prevStep()" class="btn btn-primary center-block">Prev Step</button>
+                  </div>
               </div>
           </form>
         </div>

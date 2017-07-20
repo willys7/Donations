@@ -79,7 +79,8 @@
                 agencyDetails : agencyDetails,
                 postDonation : postDonation,
                 getPaymentConfig : getPaymentConfig,
-                setPaymentConfig : setPaymentConfig
+                setPaymentConfig : setPaymentConfig,
+                setAgencyDetails : setAgencyDetails
             };
             
             return service
@@ -139,6 +140,17 @@
                 service.paymentConfig.contactEmail = payment.contactEmail;
                 service.paymentConfig.cardVrfy = payment.cardVrfy;
                 service.paymentConfig.customPledgeAmount = payment.customPledgeAmount
+            }
+
+            function setAgencyDetails(agency){
+                service.agencyDetails.DesignationEntityType = agency.DesignationEntityType;
+                service.agencyDetails.Name = agency.Name;
+                service.agencyDetails.EIN = agency.EIN;
+                service.agencyDetails.EntityId = agency.EntityId;
+                service.agencyDetails.MinimumDonation = agency.MinimumDonation;
+                service.agencyDetails.MinimumTotalDonationForDesignation = agency.MinimumTotalDonationForDesignation;
+                service.agencyDetails.ProfileOrganizationNumber = agency.ProfileOrganizationNumber;
+                service.agencyDetails.StandardAccountCode = agency.StandardAccountCode;
             }
 
             

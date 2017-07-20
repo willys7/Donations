@@ -48,7 +48,7 @@
             getPaymentLabels();
             getCountries();
             getStates();
-            getOrganizations();
+            
             vm.paymentDetails = DonationService.getPaymentConfig();
             vm.change = change;
             vm.validateCardNumber = validateCardNumber;
@@ -59,7 +59,6 @@
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
                     vm.amountOptions = data.AmountQuestions[0].AmountOptions;
-                    console.log(vm.amountOptions)
                     var creditCardList = data.CreditCardTypeList;
                     vm.creditCardValues = [];
                     for(var i=0; i<creditCardList.length; i++){
@@ -101,13 +100,12 @@
                 });
             }
             function change(){
-                console.log(vm.paymentDetails);
+                var one = 1;
             }
 
             function getOrganizations(){
                 DonationService.getOrganizations().then(function(data){
                     vm.orgs = data;
-                    console.log(vm.orgs);
                 }).catch(function(err){
                     console.log(err);
                 })
@@ -170,9 +168,14 @@
             }
 
             function submitForm(valid){
-                console.log(valid);
-                DonationService.setPaymentConfig(vm.paymentDetails)
-                $location.path("/agencies");
+                if(valid){
+                    DonationService.setPaymentConfig(vm.paymentDetails)
+                    $location.path("/agencies");
+                }
+                else{
+                    alert("Invalid form please complete all the required fields")
+                }
+                
             }
 
             
