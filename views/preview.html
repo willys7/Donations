@@ -9,18 +9,16 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <spam >Payment Details</spam>
-              <button ng-click="" class="btn btn-success ">Edit</button>
+              <button ng-click="vmPreview.initStep()" class="btn btn-success ">Edit</button>
             </h4>
           </div>
           <div id="collapse1" class="panel-collapse collapse in">
             <div class="panel-body">
                 <h4><span class="label label-primary">Status</span>  Pending</h4>
                 <h4><span class="label label-primary">Payment Type</span>  {{vmPreview.info.PaymentTypeLabel}}</h4>
-                <h4 ng-if="vmPreview.payment.pledgeAmount != -7.922816251426434e+28"><span class="label label-primary" ng-if="vmPreview.payment.pledgeAmount != -7.922816251426434e+28">Pledge</span>  ${{vmPreview.payment.pledgeAmount}}</h4>
-                <h4 ng-if="vmPreview.payment.pledgeAmount == -7.922816251426434e+28"><span class="label label-primary" ng-if="vmPreview.payment.pledgeAmount == -7.922816251426434e+28">Pledge</span>  ${{vmPreview.payment.customPledgeAmount}}</h4>
+                <h4 ><span class="label label-primary">Pledge</span>  ${{vmPreview.payment.pledgeAmount}}</h4>
                 <h4><span class="label label-primary">Payment Detail</span>  {{vmPreview.todayDate}}</h4>
-                <h4 ng-if="vmPreview.payment.pledgeAmount != -7.922816251426434e+28"><span class="label label-primary" ng-if="vmPreview.payment.pledgeAmount != -7.922816251426434e+28">Total Anual Amount</span>  ${{vmPreview.payment.pledgeAmount}}</h4>
-                <h4 ng-if="vmPreview.payment.pledgeAmount == -7.922816251426434e+28"><span class="label label-primary" ng-if="vmPreview.payment.pledgeAmount == -7.922816251426434e+28">Total Anual Amount</span>  ${{vmPreview.payment.customPledgeAmount}}</h4>
+                <h4 ><span class="label label-primary" >Total Anual Amount</span>  ${{vmPreview.payment.pledgeAmount}}</h4>
             </div>
           </div>
         </div>
@@ -28,7 +26,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <spam >Charity Details</spam>
-              <button ng-click="" class="btn btn-success ">Edit</button>
+              <button ng-click="vmPreview.prevStep()" class="btn btn-success ">Edit</button>
             </h4>
           </div>
           <div id="collapse1" class="panel-collapse collapse in">
@@ -38,9 +36,9 @@
           </div>
         </div>
         <div class="row">
-            <div class="offset-sm-2 col-sm-10">
-                <button ng-click="" class="btn btn-primary pull-left">Prev</button>
-                <button ng-click="" class="btn btn-primary pull-right">Finish</button>
+            <div class="col-lg-12">
+                <button ng-click="vmPreview.prevStep()" class="btn btn-primary pull-left">Prev</button>
+                <button ng-click="vmPreview.addDonation()" class="btn btn-primary pull-right">Finish</button>
             </div>
         </div>
       </div>

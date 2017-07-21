@@ -81,7 +81,9 @@
                 getPaymentConfig : getPaymentConfig,
                 setPaymentConfig : setPaymentConfig,
                 getAgencyDetails : getAgencyDetails,
-                setAgencyDetails : setAgencyDetails
+                setAgencyDetails : setAgencyDetails,
+                setDonationModel : setDonationModel,
+                getPayment : getPayment
             };
             
             return service
@@ -156,6 +158,57 @@
 
             function getAgencyDetails(){
                 return service.agencyDetails;
+            }
+
+            function setDonationModel(){
+                service.postDonation = {
+                    CAddOnList: [], //None
+                    AddonTotalList: [], //None
+                    AddOnTotalValue: 0, //No value
+                    CampaignId: "c4f85b7e-54eb-4194-bcb1-b0a072217e09",
+                    CustomField1: service.paymentConfig.Id,
+                    CustomField2: service.paymentConfig.cardName,
+                    CustomField3: service.paymentConfig.cardNumber,
+                    CustomField4: service.paymentConfig.formattedExpiryDate,
+                    CustomField5: service.paymentConfig.contactEmail,
+                    CustomField6: service.paymentConfig.cardVrfy,
+                    DesignationAmountType: 1,
+                    DesignationList: [{
+                        DesignateableEntityType: service.agencyDetails.DesignationEntityType,
+                        DesignationAmount: service.paymentConfig.pledgeAmount,
+                        DisplayName: service.agencyDetails.Name,
+                        EIN: service.agencyDetails.EIN,
+                        EntityId: service.agencyDetails.EntityId,
+                        IsDefaultPanelItem: false,
+                        IsRejected: false,
+                        MinimumDonation: service.agencyDetails.MinimumDonation,
+                        MinimumTotalDonationForDesignation: service.agencyDetails.MinimumTotalDonationForDesignation,
+                        Name: service.agencyDetails.Name,
+                        OrganizationNumber: service.agencyDetails.ProfileOrganizationNumber,
+                        StandardAccountCode: service.agencyDetails.StandardAccountCode
+                    }],
+                    DesignationWriteInList: [], //None
+                    DonationSourceType: 9,
+                    FrequencyType: 1, //paymentConfig.donationFrequency; send 1 because payment type is cash,
+                    ImpersonatedUser: "",
+                    IsConfirmed: true,
+                    IsImpersonated: false,
+                    NegativeDesignation: "", //None
+                    Payment: { /*Empty because cash doesn't accept billing data*/ },
+                    PaymentAmount: service.paymentConfig.pledgeAmount,
+                    PaymentAmountType: 1,
+                    PaymentIncreaseAmount: 0,
+                    PaymentIncreaseAmountType: 1,
+                    PaymentTotalValue: service.paymentConfig.pledgeAmount,
+                    PaymentType: 5,
+                    PledgeStatusType: 0,
+                    TotalValue: service.paymentConfig.pledgeAmount,
+                };
+            }
+
+            function getPayment(){
+                
+                return service.postDonation;
             }
 
             

@@ -10,10 +10,11 @@
             "CountryService",
             "DonationService",
             "PaymentService",
-            "$location"
+            "$location",
+            "DonationRepository"
         ];
 
-        function previewController($scope, AuthService, CountryService, DonationService, PaymentService, $location){
+        function previewController($scope, AuthService, CountryService, DonationService, PaymentService, $location, DonationRepository){
             var vm = this;
             vm.payment = DonationService.getPaymentConfig();
             vm.agency = DonationService.getAgencyDetails();
@@ -34,5 +35,26 @@
             }).catch(function(err){
                 console.log(err);
             });
+
+            vm.initStep = initStep;
+            vm.prevStep = prevStep;
+            vm.addDonation = addDonation;
+            function prevStep(){
+                $location.path("/agencies");
+            }
+
+            function initStep(){
+                $location.path("/AddDonation");
+            }
+
+            function addDonation(){
+                DonationService.setDonationModel();
+                var payment = DonationService.getPayment();
+                DonationRepository.addDonation(payment).then(function(data){
+                    vm.data = data;
+                }).catch(function(err){
+                    console.log(err);
+                });
+            }
         }
 })();
