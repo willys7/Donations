@@ -52,8 +52,16 @@
                 var payment = DonationService.getPayment();
                 DonationRepository.addDonation(payment).then(function(data){
                     vm.data = data;
+                    if(vm.data.status == 200){
+                        alert("Add donation success");
+                        $location.path("/home")
+                    }
+                    else{
+                        alert("Error: We have a some problems adding the donations please review the data");
+                    }
                 }).catch(function(err){
                     console.log(err);
+                    alert("Error: We have a some problems adding the donations please review the data");
                 });
             }
         }
