@@ -3,10 +3,12 @@
 	angular.module('Donations').factory('DonationRepository',donationRepository);
         donationRepository.$inject = ['$http','AuthService'];
         function donationRepository($http, AuthService){
+            
             var repository = {
                 getAllDonationsByUser : getAllDonationsByUser,
                 getOrganizations : getOrganizations,
-                addDonation : addDonation
+                addDonation : addDonation,
+                authModel : AuthService.getKeys()
             };
 
             return repository;
