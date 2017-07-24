@@ -3,16 +3,21 @@
 
 	angular.module('Donations')
         .controller('HomeController',homeController)
+        .component('homeComponent',{
+            templateUrl: '/views/home.html',
+            controller: 'HomeController',
+            controllerAs: 'vmHome'
+        });
         //Nuevos servicios y repositorios
         homeController.$inject = [
             "$scope",
             "AuthService",
             "DonationService",
             '$uibModal',
-            '$location'
+            '$state'
         ];
 
-        function homeController($scope, AuthService, DonationService, $uibModal, $location){
+        function homeController($scope, AuthService, DonationService, $uibModal, $state){
             var vm = this;
 
             vm.donations = {};
@@ -43,7 +48,7 @@
             }
 
             function addDonation(){
-                $location.path("/AddDonation");
+                $state.go("addDonation");
             }
             
             

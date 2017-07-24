@@ -3,6 +3,11 @@
 
 	angular.module('Donations')
         .controller('AgenciesController',agenciesController)
+        .component('agenciesComponent',{
+            templateUrl: '/views/agencies.html',
+            controller: 'AgenciesController',
+            controllerAs: 'vmAgencies'
+        });
         //Nuevos servicios y repositorios
         agenciesController.$inject = [
             "$scope",
@@ -10,10 +15,10 @@
             "CountryService",
             "DonationService",
             "PaymentService",
-            "$location"
+            "$state"
         ];
 
-        function agenciesController($scope, AuthService, CountryService, DonationService, PaymentService, $location){
+        function agenciesController($scope, AuthService, CountryService, DonationService, PaymentService, $state){
             var vm = this;
             vm.currentOrg = null;
             vm.validOrg = true;
@@ -44,7 +49,7 @@
                     console.log(vm.currentOrg);
                     var data = JSON.parse(vm.currentOrg);
                     DonationService.setAgencyDetails(data);
-                    $location.path("/preview");
+                    $state.go("preview");
                 }
                 else{
                     alert("Please select one organization");
@@ -52,7 +57,7 @@
             }
 
             function prevStep(){
-                $location.path("/AddDonation");
+                $state.go("addDonation");
             }
         }
 })();

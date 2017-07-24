@@ -3,14 +3,19 @@
 
 	angular.module('Donations')
         .controller('AuthController',authController)
+        .component("login",{
+            templateUrl: '/views/login.html',
+            controller: 'AuthController',
+            controllerAs: 'vmAuth'
+        });
         //Nuevos servicios y repositorios
         authController.$inject = [
             "$scope",
             "AuthService",
-            "$location"
+            "$state"
         ];
 
-        function authController($scope, AuthService, $location){
+        function authController($scope, AuthService, $state){
             var vm = this;
             AuthService.setApiToken();
             
@@ -35,7 +40,7 @@
                 }
                 AuthService.setUser(vm.user);
                 AuthService.authenticateUser().then(function(data){
-                    $location.path("/home");
+                    $state.go("home");
                     
                 }).catch(function(err){
                     alert("Please enter your correct credentials");

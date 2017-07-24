@@ -3,6 +3,11 @@
 
 	angular.module('Donations')
         .controller('PreviewController',previewController)
+        .component('previewComponent',{
+            templateUrl: '/views/preview.html',
+            controller: 'PreviewController',
+            controllerAs: 'vmPreview'
+        });
         //Nuevos servicios y repositorios
         previewController.$inject = [
             "$scope",
@@ -10,11 +15,11 @@
             "CountryService",
             "DonationService",
             "PaymentService",
-            "$location",
+            "$state",
             "DonationRepository"
         ];
 
-        function previewController($scope, AuthService, CountryService, DonationService, PaymentService, $location, DonationRepository){
+        function previewController($scope, AuthService, CountryService, DonationService, PaymentService, $state, DonationRepository){
             var vm = this;
             vm.payment = DonationService.getPaymentConfig();
             vm.agency = DonationService.getAgencyDetails();
@@ -40,11 +45,11 @@
             vm.prevStep = prevStep;
             vm.addDonation = addDonation;
             function prevStep(){
-                $location.path("/agencies");
+                $state.go("agencies");
             }
 
             function initStep(){
-                $location.path("/AddDonation");
+                $state.go("addDonation");
             }
 
             function addDonation(){
@@ -54,7 +59,7 @@
                     vm.data = data;
                     if(vm.data.status == 200){
                         alert("Add donation success");
-                        $location.path("/home")
+                        $state.go("home")
                     }
                     else{
                         alert("Error: We have a some problems adding the donations please review the data");

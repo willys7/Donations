@@ -3,6 +3,11 @@
 
 	angular.module('Donations')
         .controller('DonationController',donationController)
+        .component('donationComponent',{
+            templateUrl: '/views/addDonation.html',
+            controller: 'DonationController',
+            controllerAs: 'vmDonation'
+        });
         //Nuevos servicios y repositorios
         donationController.$inject = [
             "$scope",
@@ -10,10 +15,10 @@
             "CountryService",
             "DonationService",
             "PaymentService",
-            "$location"
+            "$state"
         ];
 
-        function donationController($scope, AuthService, CountryService, DonationService, PaymentService, $location){
+        function donationController($scope, AuthService, CountryService, DonationService, PaymentService, $state){
             var vm = this;
             vm.paymentLabels = {};
             vm.amountOptions = {};
@@ -170,7 +175,7 @@
             function submitForm(valid){
                 if(valid){
                     DonationService.setPaymentConfig(vm.paymentDetails)
-                    $location.path("/agencies");
+                    $state.go("agencies");
                 }
                 else{
                     alert("Invalid form please complete all the required fields")
