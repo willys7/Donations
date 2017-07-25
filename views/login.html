@@ -5,6 +5,7 @@
                 <h3 class="panel-tittle">Login</h3>
             </div>
             <div class="panel-body">
+                <div uib-alert ng-if="vmAuth.alert != null" ng-class="'alert-' + 'danger'" close="vmAuth.closeAlert()">{{vmAuth.alert}}</div>
                 <form ng-submit="vmAuth.login()">
                     <div class="form-group row">
                         <label for="formGroupExampleInput" class="col-sm-2 col-form-label">Compaign Code</label>

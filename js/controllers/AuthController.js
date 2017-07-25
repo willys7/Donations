@@ -20,17 +20,22 @@
             AuthService.setApiToken();
             
             vm.login = login;
+            vm.closeAlert =  closeAlert
+
+            function closeAlert() {
+              vm.alert = null;
+            };
             function login(){
                 if(!vm.userName || vm.userName !== "redriver" ){
-                    alert("Please enter your correct credentials");
+                    vm.alert = "Please enter your correct credentials";
                     return 
                 }
                 if(!vm.password || vm.password !== "p@ssword" ){
-                    alert("Please enter your correct credentials");
+                    vm.alert = "Please enter your correct credentials";
                     return
                 }
                 if(!vm.campaingCode || vm.campaingCode !== "72001" ){
-                    alert("Please enter your correct credentials");
+                    vm.alert = "Please enter your correct credentials";
                     return
                 }
                 vm.user = {
@@ -43,7 +48,7 @@
                     $state.go("home");
                     
                 }).catch(function(err){
-                    alert("Please enter your correct credentials");
+                    vm.alert = "Please enter your correct credentials";
                 });
 
                 
