@@ -57,6 +57,7 @@
                 var payment = DonationService.getPayment();
                 DonationRepository.addDonation(payment).then(function(data){
                     vm.data = data;
+                    1   
                     if(vm.data.status == 200){
                         alert("Add donation success");
                         $state.go("home")
