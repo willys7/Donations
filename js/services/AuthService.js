@@ -43,11 +43,19 @@
             function authenticateUser(){
                 var keyValue = "";
                 return AuthRepository.authenticateUser(service.userAuthModel).then(function(data){
-                    keyValue = data.data.Data.DonorToken;
-                    service.authModel.userKey = keyValue;
-                    service.authModel.status = data.status;
+                    if(data.status != 200){
+                        return data;
+                    }
+                    else{
+                        keyValue = data.data.Data.DonorToken;
+                        service.authModel.userKey = keyValue;
+                        service.authModel.status = data.status;
+                    }
+                    return data;
                 }).catch(function(err){
                     console.log(err);
+                    return err;
+                    
                 });
                 
             }

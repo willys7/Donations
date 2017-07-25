@@ -13,10 +13,11 @@
             "$scope",
             "AuthService",
             "$state",
-            'blockUI'
+            'blockUI',
+            '$timeout'
         ];
 
-        function authController($scope, AuthService, $state,blockUI){
+        function authController($scope, AuthService, $state, blockUI, $timeout){
             var vm = this;
             vm.loginBlockUI = blockUI.instances.get('loginBlock');
             
@@ -35,18 +36,7 @@
               vm.alert = null;
             };
             function login(){
-                if(!vm.userName || vm.userName !== "redriver" ){
-                    vm.alert = "Please enter your correct credentials";
-                    return 
-                }
-                if(!vm.password || vm.password !== "p@ssword" ){
-                    vm.alert = "Please enter your correct credentials";
-                    return
-                }
-                if(!vm.campaingCode || vm.campaingCode !== "72001" ){
-                    vm.alert = "Please enter your correct credentials";
-                    return
-                }
+                
                 vm.user = {
                     userName: vm.userName,
                     password: vm.password,
@@ -54,9 +44,23 @@
                 }
                 AuthService.setUser(vm.user);
                 AuthService.authenticateUser().then(function(data){
-                    $state.go("home");
+                    if(data.status != 200){
+                        $timeout(function() { 
+                          throw new Error('Bad Credentials'); 
+                          vm.loginBlockUI.stop(); // Stop will never be called 
+                        }, 1000);
+                        vm.alert = "Please enter your correct credentials";
+                    }
+                    else{
+                        $state.go("home");
+                    }
+                    
                     
                 }).catch(function(err){
+                    $timeout(function() { 
+                      throw new Error('Oh dear!'); 
+                      vm.loginBlockUI.stop(); // Stop will never be called 
+                    }, 1000);// Stop will never be called 
                     vm.alert = "Please enter your correct credentials";
                 }).finally(function () {
                     vm.loginBlockUI.stop();
