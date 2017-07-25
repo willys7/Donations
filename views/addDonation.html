@@ -94,7 +94,7 @@
               
                       <div class="country" ng-class="{ 'has-error' : donationForm.country.$invalid && !donationForm.country.$pristine }">
                         <h4><span class="label label-primary">Country</span></h4>
-                        <select class="selectpicker" name="country" ng-model="vmDonation.contact.country" required>
+                        <select id='country' class="selectpicker" name="country" ng-model="vmDonation.contact.country" required>
                           <option ng-repeat="value in vmDonation.countries">{{value.CountryName}}</option>
                           <p ng-show="donationForm.country.$invalid && !donationForm.country.$pristine" class="help-block">Please select a country</p>
                         </select>
