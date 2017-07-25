@@ -6,31 +6,7 @@
                 <button type="button" class="btn btn-success" ng-click="vmHome.addDonation()">Add Donation</button>
             </div>
             <div class="panel-body">
-                    <table class="table table-striped">
-                    <thead>
-                        <tr>
-                        <th>Date</th>
-                        <th>Campaing</th>
-                        <th>Pledge</th>
-                        <th>Payment Type</th>
-                        <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="donation in vmHome.donations">    
-                        <td>{{donation.DateCreated | date}}</td>
-                        <td>{{ donation.CampaignName }}</td>
-                        <td>{{ donation.TransactionNumber }}</td>
-                        <td>Cash</td>
-                        <td>{{ donation.PaymentAmount | currency }}</td>
-                        <td>
-                            <button type="button" class="btn btn-default btn-xs" ng-click="vmHome.donationDetails(donation)">
-                                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                            </button>
-                        </td>
-                        </tr>
-                    </tbody>
-                    </table>
+                    <div id="grid1" ui-grid="vmHome.gridOptions" class="grid"></div>
             </div>
         </div>
     </div>

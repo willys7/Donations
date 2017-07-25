@@ -5,6 +5,7 @@
         function donationService($http, DonationRepository){
             var donations = {};
             var orgs = {};
+            var tableData = [];
             var paymentConfig = {
                 Id : null,
                 cardName : null,
@@ -83,7 +84,9 @@
                 getAgencyDetails : getAgencyDetails,
                 setAgencyDetails : setAgencyDetails,
                 setDonationModel : setDonationModel,
-                getPayment : getPayment
+                getPayment : getPayment,
+                tableData : tableData,
+                getTableData : getTableData
             };
             
             return service
@@ -106,6 +109,21 @@
                 }).catch(function(err){
                     console.log(err);
                 });
+            }
+
+            function getTableData(data){
+                for(var i=0; i<data.length; i++){
+                    var element = data[i]
+                    var donation = {
+                        Date: element.DateCreated,
+                        Campaing: element.CampaignName,
+                        Pledge: element.TransactionNumber,
+                        PaymentType: 'Cash',
+                        Total: element.PaymentAmount
+                    };
+                    service.tableData.push(donation);
+                }
+                return service.tableData;
             }
 
             function getPaymentConfig(){

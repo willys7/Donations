@@ -14,21 +14,52 @@
             "AuthService",
             "DonationService",
             '$uibModal',
-            '$state'
+            '$state',
+            'uiGridConstants'
         ];
 
-        function homeController($scope, AuthService, DonationService, $uibModal, $state){
+        function homeController($scope, AuthService, DonationService, $uibModal, $state, uiGridConstants){
             var vm = this;
 
             vm.donations = {};
-            
-            
-            DonationService.getAllDonationsByUser().then(function(data){
-                vm.donations = data;
-                console.log(vm.donations);
-            }).catch(function(err){
-                console.log(err);
-            });
+            vm.donationTable = [{
+                Date: null,
+                Campaing: null,
+                Pledge: null,
+                PaymentType: null,
+                Total: null
+            }];
+            getDonations();
+            vm.gridOptions = {
+
+                showGridFooter: false,
+                showColumnFooter: false,
+                enableFiltering: true,
+                columnDefs: [
+                    { name:'Campaing', field: 'Campaing' },
+                    { name:'Pledge', field: 'Pledge',width: '20%' },
+                    { field: 'Total', field:'Total', cellFilter:'currency', width: '13%' },
+                    { name: 'Payment Type', field: 'PaymentType', width: '13%'},
+                    { name: 'Date', field: 'Date', width: '20%', cellFilter: 'date'}
+                ],
+                data: vm.donationTable,
+                onRegisterApi: function(gridApi) {
+                        vm.gridApi = gridApi;
+                }
+
+            };
+            function getDonations(){
+                DonationService.getAllDonationsByUser().then(function(data){
+                    vm.donations = data;
+                    console.log(vm.donations);
+                    vm.donationTable = DonationService.getTableData(vm.donations);
+                    vm.gridOptions.data = vm.donationTable;
+                    console.log(vm.donationTable);
+                }).catch(function(err){
+                    console.log(err);
+                });
+            }
+           
 
             vm.donationDetails = donationDetails;
             vm.addDonation = addDonation;
