@@ -25,6 +25,7 @@
             vm.countries = [];
             vm.states = [];
             vm.year = [];
+            vm.alert = null;
             vm.orgs = {};
             vm.validNumber = true;
             vm.validName = true;
@@ -89,6 +90,11 @@
                 });
             }
 
+            vm.closeAlert =  closeAlert
+            
+            function closeAlert() {
+              vm.alert = null;
+            };
             function getCountries(){
                 CountryService.getCountries().then(function(data){
                     vm.countries = data;
@@ -178,7 +184,7 @@
                     $state.go("agencies");
                 }
                 else{
-                    alert("Invalid form please complete all the required fields")
+                    vm.alert = "Invalid form please complete all the required fields";
                 }
                 
             }

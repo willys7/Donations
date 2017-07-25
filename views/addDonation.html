@@ -1,175 +1,152 @@
 <div class="addDonation">
     <div class="container">
         <div class="panel panel-primary">
+          <div uib-alert ng-if="vmDonation.alert != null" ng-class="'alert-' + 'danger'" close="vmDonation.closeAlert()">{{vmDonation.alert}}</div>
             <div class="panel-heading">
                 <h3 class="panel-tittle">Add Donation</h3>
             </div>
             <div class="panel-body">
-                <form name="donationForm" ng-submit="vmDonation.submitForm(donationForm.$valid)" novalidate>
+                <form uib-accordion close-others="false" name="donationForm" ng-submit="vmDonation.submitForm(donationForm.$valid)" novalidate>
 
-                    <div class="form-group row panel panel-primary" >
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <spam >{{vmDonation.paymentLabels.PaymentTypeLabel}}</spam>
-                          </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                          <div class="panel-body">
-                              <div class="instructions">
-                                {{vmDonation.paymentLabels.PaymentInstructions}}
-                              </div>
-                              <div class="question">
-                                {{vmDonation.paymentLabels.PaymentQuestion}}
-                              </div>
-                              <div class="amount row"> 
-                                  <div class="radio" >
-                                    <div class="col-lg-3" ng-repeat="value in vmDonation.amountOptions">
-                                      <label ng-if="value.AmountLabel != '' ">
-                                        <input type="radio" name="optradio" value="{{value.Amount}}" ng-model="vmDonation.paymentDetails.pledgeAmount" ng-change="vmDonation.validateCustomPledge()">{{value.AmountLabel}}   
-                                      </label>
-                                      <label ng-if="value.AmountLabel == '' " ng-class="{ 'has-error' : donationForm.customVal.$invalid && !donationForm.customVal.$pristine }">
-                                          <input type="radio" name="optradio" value="{{value.Amount}}" ng-model="vmDonation.paymentDetails.pledgeAmount" ng-change="vmDonation.validateCustomPledge()"> $ <input name="customVal" ng-model="vmDonation.paymentDetails.customPledgeAmount" ng-blur="vmDonation.validateCustomPledge()" type="text"><br>
-                                          <p ng-show="!vmDonation.validCustomPledge" class="help-block">Invalid pledge amount</p>
-                                        </label> 
-                                    </div>
-                                  </div>
-                              </div>
-                              <div class="frequency row">
-                                  <div class="col-lg-12">
-                                    {{vmDonation.paymentLabels.FrequencyInstructions}}
-                                  </div>
-                                  <div class="col-lg-2" ng-repeat="value in vmDonation.paymentLabels.FrequencyTypeList">
-                                    <label ng-if= "value == 1 " >
-                                      <input type="radio" name="optradioFrequency" value="{{value}}">One-time  
-                                    </label>
-                                    <label ng-if= "value == 2" >
-                                      <input type="radio" name="optradioFrequency" value="{{value}}">Monthly  
-                                    </label>
-                                    <label ng-if= "value == 3" >
-                                      <input type="radio" name="optradioFrequency" value="{{value}}">Quarterly
-                                    </label>
-                                    <label ng-if= "value == 4" >
-                                      <input type="radio" name="optradioFrequency" value="{{value}}">Semi-annual  
-                                    </label>
-                                  </div>
-                              </div>
+                    <div class="form-group row panel panel-primary" uib-accordion-group is-open="true" heading="{{vmDonation.paymentLabels.PaymentTypeLabel}}">
+                      <div class="instructions">
+                        {{vmDonation.paymentLabels.PaymentInstructions}}
+                      </div>
+                      <div class="question">
+                        {{vmDonation.paymentLabels.PaymentQuestion}}
+                      </div>
+                      <div class="amount row"> 
+                          <div class="radio" >
+                            <div class="col-lg-3" ng-repeat="value in vmDonation.amountOptions">
+                              <label ng-if="value.AmountLabel != '' ">
+                                <input type="radio" name="optradio" value="{{value.Amount}}" ng-model="vmDonation.paymentDetails.pledgeAmount" ng-change="vmDonation.validateCustomPledge()">{{value.AmountLabel}}   
+                              </label>
+                              <label ng-if="value.AmountLabel == '' " ng-class="{ 'has-error' : donationForm.customVal.$invalid && !donationForm.customVal.$pristine }">
+                                  <input type="radio" name="optradio" value="{{value.Amount}}" ng-model="vmDonation.paymentDetails.pledgeAmount" ng-change="vmDonation.validateCustomPledge()"> $ <input name="customVal" ng-model="vmDonation.paymentDetails.customPledgeAmount" ng-blur="vmDonation.validateCustomPledge()" type="text"><br>
+                                  <p ng-show="!vmDonation.validCustomPledge" class="help-block">Invalid pledge amount</p>
+                                </label> 
+                            </div>
                           </div>
-                        </div>
+                      </div>
+                      <div class="frequency row">
+                          <div class="col-lg-12">
+                            {{vmDonation.paymentLabels.FrequencyInstructions}}
+                          </div>
+                          <div class="col-lg-2" ng-repeat="value in vmDonation.paymentLabels.FrequencyTypeList">
+                            <label ng-if= "value == 1 " >
+                              <input type="radio" name="optradioFrequency" value="{{value}}">One-time  
+                            </label>
+                            <label ng-if= "value == 2" >
+                              <input type="radio" name="optradioFrequency" value="{{value}}">Monthly  
+                            </label>
+                            <label ng-if= "value == 3" >
+                              <input type="radio" name="optradioFrequency" value="{{value}}">Quarterly
+                            </label>
+                            <label ng-if= "value == 4" >
+                              <input type="radio" name="optradioFrequency" value="{{value}}">Semi-annual  
+                            </label>
+                          </div>
+                      </div>                     
                     </div>
 
-                    <div class="form-group row panel panel-primary">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <spam >{{vmDonation.paymentLabels.PaymentTypeLabel}} Information</spam>
-                          </h4>
-                        </div>
-                        <div id="collapse1" class="panel-collapse collapse in">
-                          <div class="panel-body">
-                            <div class="card-type" ng-class="{ 'has-error' : donationForm.cardType.$invalid && !donationForm.cardType.$pristine }">
-                              <h4><span class="label label-primary">Card Type</span></h4>
-                              <select class="selectpicker" name="cardType" ng-model="vmDonation.paymentDetails.Id" ng-change="vmDonation.validateCardNumber()" required>
-                                <option ng-repeat="value in vmDonation.creditCardValues">{{value}}</option>
-                              </select>
-                              <p ng-show="donationForm.cardType.$invalid && !donationForm.cardType.$pristine" class="help-block">Please select one option</p>
-                            </div>
-                            <div class="card" ng-class="{ 'has-error' : donationForm.cardNumber.$invalid && !donationForm.cardNumber.$pristine }">
-                              <h4><span class="label label-primary">Card Number</span></h4> <input type="text" name="cardNumber" ng-model="vmDonation.paymentDetails.cardNumber" ng-blur="vmDonation.validateCardNumber()" required>
-                              <p ng-show="donationForm.cardNumber.$invalid && !donationForm.cardNumber.$pristine" class="help-block">The card number is required</p>
-                              <p ng-show="!vmDonation.validNumber">Invalid card number</p>
-                            </div>
-                            <div class="card-verification" ng-class="{ 'has-error' : donationForm.cardVrfy.$invalid && !donationForm.cardVrfy.$pristine }">
-                              <h4><span class="label label-primary">Card Verification Number</span></h4> <input type="text" name="cardVrfy" ng-model="vmDonation.paymentDetails.cardVrfy" ng-minlength="3" ng-maxlength="3" required><br>
-                              <p ng-show="donationForm.cardVrfy.$invalid && !donationForm.cardVrfy.$pristine" class="help-block">Invalid CSV</p>
-                              
-                            </div>
-                            <div class="card-name" ng-class="{ 'has-error' : (donationForm.cardName.$invalid && !donationForm.cardName.$pristine)}">
-                              <h4><span class="label label-primary">Name On Card</span></h4> <input type="text" name="cardName" ng-model="vmDonation.paymentDetails.cardName" ng-blur="vmDonation.validatecardName()" required><br>
-                              <p ng-show="donationForm.cardName.$invalid && !donationForm.cardName.$pristine" class="help-block">The card name is required</p>
-                              <p ng-show="!vmDonation.validName" class="help-block">Invalid card name</p>
-                            </div>
-                            <div class="date" ng-class="{ 'has-error' : (donationForm.cardMonth.$invalid && !donationForm.cardMonth.$pristine) || (donationForm.cardYear.$invalid && !donationForm.cardYear.$pristine)}">
-                              <h4><span class="label label-primary">Expiration Date</span></h4>
-                              <select class="selectpicker" name="cardMonth" ng-model="vmDonation.paymentDetails.month" required>
-                                <option ng-repeat="value in vmDonation.month">{{value}}</option>
-                                <p ng-show="donationForm.cardMonth.$invalid && !donationForm.cardMonth.$pristine" class="help-block">Please select a month</p>
-                              </select>
-                              <select class="selectpicker" name="cardYear" ng-model="vmDonation.paymentDetails.year" required>
-                                <option ng-repeat="value in vmDonation.year">{{value}}</option>
-                                <p ng-show="donationForm.cardYear.$invalid && !donationForm.cardYear.$pristine" class="help-block">Please select a year</p>
-                              </select>
-                            </div>
-                            <div class="email" ng-class="{ 'has-error' : donationForm.contactEmail.$invalid && !donationForm.contactEmail.$pristine }">
-                                <h4><span class="label label-primary">Contact Email Address</span></h4> <input type="email" name="contactEmail" ng-model="vmDonation.paymentDetails.contactEmail" required><br>
-                                <p ng-show="donationForm.contactEmail.$invalid && !donationForm.contactEmail.$pristine" class="help-block">Invalid Email</p>
-                            </div>
+                    <div class="form-group row panel panel-primary" uib-accordion-group heading="{{vmDonation.paymentLabels.PaymentTypeLabel}} Information">
+                      <div class="card-type" ng-class="{ 'has-error' : donationForm.cardType.$invalid && !donationForm.cardType.$pristine }">
+                        <h4><span class="label label-primary">Card Type</span></h4>
+                        <select class="selectpicker" name="cardType" ng-model="vmDonation.paymentDetails.Id" ng-change="vmDonation.validateCardNumber()" required>
+                          <option ng-repeat="value in vmDonation.creditCardValues">{{value}}</option>
+                        </select>
+                        <p ng-show="donationForm.cardType.$invalid && !donationForm.cardType.$pristine" class="help-block">Please select one option</p>
+                      </div>
+                      <div class="card" ng-class="{ 'has-error' : donationForm.cardNumber.$invalid && !donationForm.cardNumber.$pristine }">
+                        <h4><span class="label label-primary">Card Number</span></h4> <input type="text" name="cardNumber" ng-model="vmDonation.paymentDetails.cardNumber" ng-blur="vmDonation.validateCardNumber()" required>
+                        <p ng-show="donationForm.cardNumber.$invalid && !donationForm.cardNumber.$pristine" class="help-block">The card number is required</p>
+                        <p ng-show="!vmDonation.validNumber">Invalid card number</p>
+                      </div>
+                      <div class="card-verification" ng-class="{ 'has-error' : donationForm.cardVrfy.$invalid && !donationForm.cardVrfy.$pristine }">
+                        <h4><span class="label label-primary">Card Verification Number</span></h4> <input type="text" name="cardVrfy" ng-model="vmDonation.paymentDetails.cardVrfy" ng-minlength="3" ng-maxlength="3" required><br>
+                        <p ng-show="donationForm.cardVrfy.$invalid && !donationForm.cardVrfy.$pristine" class="help-block">Invalid CSV</p>
+                        
+                      </div>
+                      <div class="card-name" ng-class="{ 'has-error' : (donationForm.cardName.$invalid && !donationForm.cardName.$pristine)}">
+                        <h4><span class="label label-primary">Name On Card</span></h4> <input type="text" name="cardName" ng-model="vmDonation.paymentDetails.cardName" ng-blur="vmDonation.validatecardName()" required><br>
+                        <p ng-show="donationForm.cardName.$invalid && !donationForm.cardName.$pristine" class="help-block">The card name is required</p>
+                        <p ng-show="!vmDonation.validName" class="help-block">Invalid card name</p>
+                      </div>
+                      <div class="date" ng-class="{ 'has-error' : (donationForm.cardMonth.$invalid && !donationForm.cardMonth.$pristine) || (donationForm.cardYear.$invalid && !donationForm.cardYear.$pristine)}">
+                        <h4><span class="label label-primary">Expiration Date</span></h4>
+                        <select class="selectpicker" name="cardMonth" ng-model="vmDonation.paymentDetails.month" required>
+                          <option ng-repeat="value in vmDonation.month">{{value}}</option>
+                          <p ng-show="donationForm.cardMonth.$invalid && !donationForm.cardMonth.$pristine" class="help-block">Please select a month</p>
+                        </select>
+                        <select class="selectpicker" name="cardYear" ng-model="vmDonation.paymentDetails.year" required>
+                          <option ng-repeat="value in vmDonation.year">{{value}}</option>
+                          <p ng-show="donationForm.cardYear.$invalid && !donationForm.cardYear.$pristine" class="help-block">Please select a year</p>
+                        </select>
+                      </div>
+                      <div class="email" ng-class="{ 'has-error' : donationForm.contactEmail.$invalid && !donationForm.contactEmail.$pristine }">
+                          <h4><span class="label label-primary">Contact Email Address</span></h4> <input type="email" name="contactEmail" ng-model="vmDonation.paymentDetails.contactEmail" required><br>
+                          <p ng-show="donationForm.contactEmail.$invalid && !donationForm.contactEmail.$pristine" class="help-block">Invalid Email</p>
+                      </div>
+                      
+                    </div>
+
+                    <div class="form-group row panel panel-primary" uib-accordion-group heading="Contact Information">
+              
+                      <div class="country" ng-class="{ 'has-error' : donationForm.country.$invalid && !donationForm.country.$pristine }">
+                        <h4><span class="label label-primary">Country</span></h4>
+                        <select class="selectpicker" name="country" ng-model="vmDonation.contact.country" required>
+                          <option ng-repeat="value in vmDonation.countries">{{value.CountryName}}</option>
+                          <p ng-show="donationForm.country.$invalid && !donationForm.country.$pristine" class="help-block">Please select a country</p>
+                        </select>
+                      </div>
+                      <div class="address" ng-class="{ 'has-error' : donationForm.address.$invalid && !donationForm.address.$pristine }">
+                        <h4><span class="label label-primary">Address 1</span></h4>
+                        <input type="text" name="address" ng-model="vmDonation.contact.address" required><br>
+                        <p ng-show="donationForm.address.$invalid && !donationForm.address.$pristine" class="help-block">The address is required</p>
+                      </div>
+                      <div class="address-2">
+                        <h4><span class="label label-primary" ng-model="vmDonation.contact.address2">Address 2</span></h4>
+                        <input type="text"><br>
+                      </div>
+                      <div class="city" ng-class="{ 'has-error' : donationForm.city.$invalid && !donationForm.city.$pristine }">
+                        <h4><span class="label label-primary">City</span></h4>
+                        <input type="text" name="city" ng-model="vmDonation.contact.city" required><br>
+                        <p ng-show="donationForm.city.$invalid && !donationForm.city.$pristine" class="help-block">The city is required</p>
+                      </div>
+                      <div class="state" ng-if="vmDonation.contact.country == 'United States'" ng-class="{ 'has-error' : donationForm.state.$invalid && !donationForm.state.$pristine }">
+                        <h4><span class="label label-primary">State</span></h4>
+                        <select class="selectpicker" name="state" ng-model="vmDonation.contact.state" required>
+                          <option ng-repeat="value in vmDonation.states">{{value.Name}}</option>
+                          <p ng-show="donationForm.state.$invalid && !donationForm.state.$pristine" class="help-block">Please select a state</p>
+                        </select>
+                      </div>
+                      <div class="zip" ng-if="vmDonation.contact.country == 'United States'">
+                        <h4><span class="label label-primary">Zip Code</span></h4>
+                        <div class="col-lg-2">
+                          <div ng-class="{ 'has-error' : donationForm.zipCode.$invalid && !donationForm.zipCode.$pristine }">
+                            <input type="text" placeholder="Zip Code" name="zipCode" ng-model="vmDonation.contact.zipCode" ng-minlength="5" ng-maxlength="5" required>
+                            <p ng-show="donationForm.zipCode.$invalid && !donationForm.zipCode.$pristine" class="help-block">Invalid Zip Code</p>
+                          </div> 
+                          <div ng-class="{ 'has-error' : donationForm.zipExtension.$invalid && !donationForm.zipExtension.$pristine }"> 
+                            <input type="text" placeholder="Zip Code Extension" name="zipExtension" ng-model="vmDonation.contact.zipExtension" ng-minlength="4" ng-maxlength="4">
+                            <p ng-show="donationForm.zipExtension.$invalid && !donationForm.zipExtension.$pristine" class="help-block">Invalid Zip Extension Code</p>
                           </div>
+                          
                         </div>
+                      </div>
+                      <div class="province" ng-if="vmDonation.contact.country != 'United States'" ng-class="{ 'has-error' : donationForm.province.$invalid && !donationForm.province.$pristine }">
+                        <h4><span class="label label-primary">Province</span></h4>
+                        <input type="text" name="province" ng-model="vmDonation.contact.province" required><br>
+                        <p ng-show="donationForm.province.$invalid && !donationForm.province.$pristine" class="help-block">The province is required</p>
+                      </div>
+                      <div class="postal" ng-if="vmDonation.contact.country != 'United States'" ng-class="{ 'has-error' : donationForm.postalCode.$invalid && !donationForm.postalCode.$pristine }">
+                        <h4><span class="label label-primary">Postal Code</span></h4>
+                        <input type="text" name="postalCode" ng-model="vmDonation.contact.postalCode" required><br>
+                        <p ng-show="donationForm.postalCode.$invalid && !donationForm.postalCode.$pristine" class="help-block">The postal code is required</p>
+                      </div>
                         
                     </div>
 
-                    <div class="form-group row panel panel-primary">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          <spam >Contact Information</spam>
-                        </h4>
-                      </div>
-                      <div id="collapse1" class="panel-collapse collapse in">
-                        <div class="panel-body">
-                          <div class="country" ng-class="{ 'has-error' : donationForm.country.$invalid && !donationForm.country.$pristine }">
-                            <h4><span class="label label-primary">Country</span></h4>
-                            <select class="selectpicker" name="country" ng-model="vmDonation.contact.country" required>
-                              <option ng-repeat="value in vmDonation.countries">{{value.CountryName}}</option>
-                              <p ng-show="donationForm.country.$invalid && !donationForm.country.$pristine" class="help-block">Please select a country</p>
-                            </select>
-                          </div>
-                          <div class="address" ng-class="{ 'has-error' : donationForm.address.$invalid && !donationForm.address.$pristine }">
-                            <h4><span class="label label-primary">Address 1</span></h4>
-                            <input type="text" name="address" ng-model="vmDonation.contact.address" required><br>
-                            <p ng-show="donationForm.address.$invalid && !donationForm.address.$pristine" class="help-block">The address is required</p>
-                          </div>
-                          <div class="address-2">
-                            <h4><span class="label label-primary" ng-model="vmDonation.contact.address2">Address 2</span></h4>
-                            <input type="text"><br>
-                          </div>
-                          <div class="city" ng-class="{ 'has-error' : donationForm.city.$invalid && !donationForm.city.$pristine }">
-                            <h4><span class="label label-primary">City</span></h4>
-                            <input type="text" name="city" ng-model="vmDonation.contact.city" required><br>
-                            <p ng-show="donationForm.city.$invalid && !donationForm.city.$pristine" class="help-block">The city is required</p>
-                          </div>
-                          <div class="state" ng-if="vmDonation.contact.country == 'United States'" ng-class="{ 'has-error' : donationForm.state.$invalid && !donationForm.state.$pristine }">
-                            <h4><span class="label label-primary">State</span></h4>
-                            <select class="selectpicker" name="state" ng-model="vmDonation.contact.state" required>
-                              <option ng-repeat="value in vmDonation.states">{{value.Name}}</option>
-                              <p ng-show="donationForm.state.$invalid && !donationForm.state.$pristine" class="help-block">Please select a state</p>
-                            </select>
-                          </div>
-                          <div class="zip" ng-if="vmDonation.contact.country == 'United States'">
-                            <h4><span class="label label-primary">Zip Code</span></h4>
-                            <div class="col-lg-2">
-                              <div ng-class="{ 'has-error' : donationForm.zipCode.$invalid && !donationForm.zipCode.$pristine }">
-                                <input type="text" placeholder="Zip Code" name="zipCode" ng-model="vmDonation.contact.zipCode" ng-minlength="5" ng-maxlength="5" required>
-                                <p ng-show="donationForm.zipCode.$invalid && !donationForm.zipCode.$pristine" class="help-block">Invalid Zip Code</p>
-                              </div> 
-                              <div ng-class="{ 'has-error' : donationForm.zipExtension.$invalid && !donationForm.zipExtension.$pristine }"> 
-                                <input type="text" placeholder="Zip Code Extension" name="zipExtension" ng-model="vmDonation.contact.zipExtension" ng-minlength="4" ng-maxlength="4">
-                                <p ng-show="donationForm.zipExtension.$invalid && !donationForm.zipExtension.$pristine" class="help-block">Invalid Zip Extension Code</p>
-                              </div>
-                              
-                            </div>
-                          </div>
-                          <div class="province" ng-if="vmDonation.contact.country != 'United States'" ng-class="{ 'has-error' : donationForm.province.$invalid && !donationForm.province.$pristine }">
-                            <h4><span class="label label-primary">Province</span></h4>
-                            <input type="text" name="province" ng-model="vmDonation.contact.province" required><br>
-                            <p ng-show="donationForm.province.$invalid && !donationForm.province.$pristine" class="help-block">The province is required</p>
-                          </div>
-                          <div class="postal" ng-if="vmDonation.contact.country != 'United States'" ng-class="{ 'has-error' : donationForm.postalCode.$invalid && !donationForm.postalCode.$pristine }">
-                            <h4><span class="label label-primary">Postal Code</span></h4>
-                            <input type="text" name="postalCode" ng-model="vmDonation.contact.postalCode" required><br>
-                            <p ng-show="donationForm.postalCode.$invalid && !donationForm.postalCode.$pristine" class="help-block">The postal code is required</p>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                     <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
                             <button type="submit" class="btn btn-primary center-block">Add</button>
