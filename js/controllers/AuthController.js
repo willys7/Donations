@@ -12,16 +12,25 @@
         authController.$inject = [
             "$scope",
             "AuthService",
-            "$state"
+            "$state",
+            'blockUI'
         ];
 
-        function authController($scope, AuthService, $state){
+        function authController($scope, AuthService, $state,blockUI){
             var vm = this;
+            vm.loginBlockUI = blockUI.instances.get('loginBlock');
+            
+
             AuthService.setApiToken();
             
             vm.login = login;
+            vm.activate = activate;
             vm.closeAlert =  closeAlert
 
+            function activate() {
+                vm.loginBlockUI.start();
+                login();
+            }
             function closeAlert() {
               vm.alert = null;
             };
@@ -49,7 +58,10 @@
                     
                 }).catch(function(err){
                     vm.alert = "Please enter your correct credentials";
+                }).finally(function () {
+                    vm.loginBlockUI.stop();
                 });
+
 
                 
             }
