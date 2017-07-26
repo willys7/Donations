@@ -29,18 +29,21 @@
                 PaymentType: null,
                 Total: null
             }];
+            vm.detailsTemplate = '<button type="button" class="btn btn-primary btn-xs center-block" ng-click="grid.appScope.donationDetails(row.entity)"><span class="glyphicon glyphicon-plus" aria-hidden="true">{{}}</span></button>';
             getDonations();
+            
             vm.gridOptions = {
 
                 showGridFooter: false,
                 showColumnFooter: false,
                 enableFiltering: true,
                 columnDefs: [
-                    { name:'Campaing', field: 'Campaing' },
-                    { name:'Pledge', field: 'Pledge',width: '20%' },
-                    { field: 'Total', field:'Total', cellFilter:'currency', width: '13%' },
-                    { name: 'Payment Type', field: 'PaymentType', width: '13%'},
-                    { name: 'Date', field: 'Date', width: '20%', cellFilter: 'date'}
+                    { name:'Campaign', field: 'Campaign', visible: false, width: '5%' },
+                    { name:'Pledge', field: 'Pledge',width: '30%' },
+                    { name: 'Total', field:'Total', cellFilter:'currency', width: '20%' },
+                    { name: 'Payment Type', field: 'PaymentType', width: '20%'},
+                    { name: 'Date', field: 'Date', width: '22%', cellFilter: 'date'},
+                    { name: 'Details', field: '', displayName:'', width: '5%', enableFiltering: false, cellTemplate: '<button type="button" class="btn btn-primary btn-xs center-block" ng-click="$event.stopPropagation(); grid.appScope.donationDetails(row.entity)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>'}
                 ],
                 data: vm.donationTable,
                 onRegisterApi: function(gridApi) {
@@ -62,6 +65,7 @@
            
 
             vm.donationDetails = donationDetails;
+            $scope.donationDetails = donationDetails;
             vm.addDonation = addDonation;
             function donationDetails(donation){
                 

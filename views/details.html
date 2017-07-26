@@ -1,23 +1,23 @@
 <div class="modal-content">
     <div class="modal-header">
-    <h2 class="modal-title">Transaction #{{vmDetails.donation.TransactionNumber}}</h2>
+    <h2 class="modal-title">Transaction #{{vmDetails.donation.Pledge}}</h2>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
     </div>
     <div class="modal-body">
         <h3><span class="label label-primary">Date Created</span></h3>
-        <h5>{{vmDetails.donation.DateCreated | date}}</h5>
+        <h5>{{vmDetails.donation.Date | date}}</h5>
         <h3><span class="label label-primary">Status</span></h3>
         <h5>Submitted</h5>      
         <h3><span class="label label-primary">Payment type</span></h3>
         <h5>Cash</h5>
         <h3><span class="label label-primary">Pledge</span></h3>
-        <h5>{{vmDetails.donation.PaymentAmount | currency}}</h5>
+        <h5>{{vmDetails.donation.Total | currency}}</h5>
         <h3><span class="label label-primary">Total Annual Amount</span></h3>
-        <h5>{{vmDetails.donation.TotalValue | currency}}</h5>
+        <h5>{{vmDetails.donation.Total | currency}}</h5>
         <h3><span class="label label-primary">Charity Details</span></h3>
-        <h5>{{vmDetails.donation.PaymentAmount | currency}} {{vmDetails.donation.CampaignName}}</h5>
+        <h5>{{vmDetails.donation.Total | currency}} {{vmDetails.donation.Campaign}}</h5>
         
     </div>
     <div class="modal-footer">

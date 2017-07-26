@@ -119,7 +119,8 @@
                         Campaing: element.CampaignName,
                         Pledge: element.TransactionNumber,
                         PaymentType: 'Cash',
-                        Total: element.PaymentAmount
+                        Total: element.PaymentAmount,
+                        Campaign: element.CampaignName
                     };
                     service.tableData.push(donation);
                 }
