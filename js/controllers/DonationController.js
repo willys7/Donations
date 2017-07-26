@@ -26,6 +26,14 @@
             vm.states = [];
             vm.year = [];
             vm.alert = null;
+            vm.dpOpen = false;
+            vm.dpFormat = 'MM/yy';
+            vm.dpOptions = {
+                datepickerMode: 'month',
+                minMode: 'month'
+            }
+            var today = new Date();
+            vm.cardExpires = new Date(today.getFullYear(), today.getMonth(), null, null, null, null, null);
             vm.orgs = {};
             vm.validNumber = true;
             vm.validName = true;
@@ -61,6 +69,8 @@
             vm.validatecardName = validatecardName;
             vm.validateCustomPledge = validateCustomPledge;
             vm.submitForm = submitForm;
+
+            
             function getPaymentLabels(){
                 PaymentService.getPaymentTypeLabels().then(function(data){
                     vm.paymentLabels = data;
