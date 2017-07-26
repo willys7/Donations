@@ -3,6 +3,11 @@
 
 	angular.module('Donations')
         .controller('DetailsController',detailsController)
+        .component('detailComponent',{
+            templateUrl: '/views/details.html',
+            controller: 'DetailsController',
+            controllerAs: 'vmDetails'
+        });
         //Nuevos servicios y repositorios
         detailsController.$inject = [
             "$scope",
