@@ -68,7 +68,9 @@
             $scope.donationDetails = donationDetails;
             vm.addDonation = addDonation;
             function donationDetails(donation){
-                
+
+                $state.go('details', {donationDetails: donation});
+                /*
                 return $uibModal.open({
                     controller: 'DetailsController',
                     controllerAs: 'vmDetails',
@@ -79,7 +81,7 @@
                         }
                     }
                 });
-                
+                */
             }
 
             function addDonation(){

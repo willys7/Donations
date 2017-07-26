@@ -11,16 +11,16 @@
         //Nuevos servicios y repositorios
         detailsController.$inject = [
             "$scope",
-            "donationDetails",
-            "$uibModalInstance"
+            '$stateParams',
+            '$state'
         ];
 
-        function detailsController($scope, donationDetails, $uibModalInstance){
+        function detailsController($scope, $stateParams, $state){
             var vm = this;
-            vm.donation = donationDetails;
+            vm.donation = $stateParams.donationDetails;
             vm.cancel = cancel;
             function cancel() {
-                $uibModalInstance.dismiss('cancel');
+                $state.go('home');
             };
             
         }
