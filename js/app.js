@@ -1,4 +1,4 @@
 (function() {
 'use strict';
-    angular.module("Donations", ['ui.router','ui.bootstrap', 'ui.bootstrap.tpls','ui.grid','blockUI','ui.bootstrap.datetimepicker']);
+    angular.module("Donations", ['ui.router','ui.bootstrap', 'ui.bootstrap.tpls','ui.grid','blockUI','ui.bootstrap.datetimepicker','Auth']);
 })();
