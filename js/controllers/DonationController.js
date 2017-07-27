@@ -63,6 +63,8 @@
             getCountries();
             getStates();
             
+            
+            
             vm.paymentDetails = DonationService.getPaymentConfig();
             vm.change = change;
             vm.validateCardNumber = validateCardNumber;
@@ -190,6 +192,8 @@
 
             function submitForm(valid){
                 if(valid){
+                    var realDate = DonationService.DateFormat(vm.cardExpires);
+                    vm.paymentDetails.formattedExpiryDate = realDate;
                     DonationService.setPaymentConfig(vm.paymentDetails)
                     $state.go("agencies");
                 }

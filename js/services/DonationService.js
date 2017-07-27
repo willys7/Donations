@@ -86,7 +86,8 @@
                 setDonationModel : setDonationModel,
                 getPayment : getPayment,
                 tableData : tableData,
-                getTableData : getTableData
+                getTableData : getTableData,
+                DateFormat : DateFormat
             };
             
             return service
@@ -132,9 +133,7 @@
             }
 
             function setPaymentConfig(payment){
-                if(payment.month > 0  && payment.month < 10 ){
-                    payment.month = "0" + payment.month
-                }
+                
                 if(payment.Id == "Visa"){
                     service.paymentConfig.Id = 1;
                 }
@@ -158,7 +157,7 @@
                 }
                 service.paymentConfig.cardName = payment.cardName;
                 service.paymentConfig.cardNumber = payment.cardNumber;
-                service.paymentConfig.formattedExpiryDate = payment.month + payment.year;
+                service.paymentConfig.formattedExpiryDate = payment.formattedExpiryDate;
                 service.paymentConfig.contactEmail = payment.contactEmail;
                 service.paymentConfig.cardVrfy = payment.cardVrfy;
                 service.paymentConfig.customPledgeAmount = payment.customPledgeAmount
@@ -228,6 +227,17 @@
             function getPayment(){
                 
                 return service.postDonation;
+            }
+
+            function DateFormat(date){
+                var year = date.getFullYear();
+                year = year.toString();
+                year = year.substr(2,4);
+
+                var month = date.getMonth();
+                month = month.toString();
+                var newDate = year + month;
+                return newDate;
             }
 
             

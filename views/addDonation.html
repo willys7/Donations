@@ -72,22 +72,14 @@
                         <p ng-show="donationForm.cardName.$invalid && !donationForm.cardName.$pristine" class="help-block">The card name is required</p>
                         <p ng-show="!vmDonation.validName" class="help-block">Invalid card name</p>
                       </div>
-                      <div class="date" ng-class="{ 'has-error' : (donationForm.cardMonth.$invalid && !donationForm.cardMonth.$pristine) || (donationForm.cardYear.$invalid && !donationForm.cardYear.$pristine)}">
+                      <div class="date" ng-class="{ 'has-error' : donationForm.cardExpires.$invalid && (donationForm.$submitted || donationForm.cardExpires.$touched)}">
                         <h4><span class="label label-primary">Expiration Date</span></h4>
-                        <select class="selectpicker" name="cardMonth" ng-model="vmDonation.paymentDetails.month" required>
-                          <option ng-repeat="value in vmDonation.month">{{value}}</option>
-                          <p ng-show="donationForm.cardMonth.$invalid && !donationForm.cardMonth.$pristine" class="help-block">Please select a month</p>
-                        </select>
-                        <select class="selectpicker" name="cardYear" ng-model="vmDonation.paymentDetails.year" required>
-                          <option ng-repeat="value in vmDonation.year">{{value}}</option>
-                          <p ng-show="donationForm.cardYear.$invalid && !donationForm.cardYear.$pristine" class="help-block">Please select a year</p>
-                        </select>
-                      </div>
-                      <div class="input-group">
-                          <input type="text" name="cardExpires" class="form-control" id="cardExpires" uib-datepicker-popup="{{vmDonation.dpFormat}}" placeholder="{{vmDonation.dpFormat}}" ng-model="vmDonation.cardExpires" ng-required="true" is-open="vmDonation.dpOpen" datepicker-options="vmDonation.dpOptions" close-text="Close">
-                          <span class="input-group-btn">
-                              <button type="button" class="btn btn-default" ng-click="vmDonation.dpOpen = !vmDonation.dpOpen"><i class="glyphicon glyphicon-calendar"></i></button>
-                          </span>
+                        <div class="input-group col-md-2">
+                            <input type="text" name="cardExpires" class="form-control" id="cardExpires" uib-datepicker-popup="{{vmDonation.dpFormat}}" placeholder="{{vmDonation.dpFormat}}" ng-model="vmDonation.cardExpires" ng-required="true" is-open="vmDonation.dpOpen" datepicker-options="vmDonation.dpOptions" close-text="Close">
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="vmDonation.dpOpen = !vmDonation.dpOpen"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </div>
                       </div>
                       <div class="email" ng-class="{ 'has-error' : donationForm.contactEmail.$invalid && !donationForm.contactEmail.$pristine }">
                           <h4><span class="label label-primary">Contact Email Address</span></h4> <input type="email" name="contactEmail" ng-model="vmDonation.paymentDetails.contactEmail" required><br>
