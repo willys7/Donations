@@ -1,6 +1,6 @@
 (function () {
 'use strict';
-	angular.module('Donations').factory('CountryService',countryService);
+	angular.module('Donation').factory('CountryService',countryService);
         countryService.$inject = ['$http','CountryRepository'];
         function countryService($http, CountryRepository){
             var countries = {};

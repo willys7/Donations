@@ -1,6 +1,6 @@
 (function () {
 'use strict';
-	angular.module('Donations').factory('PaymentService',paymentService);
+	angular.module('Donation').factory('PaymentService',paymentService);
         paymentService.$inject = ['$http','PaymentRepository'];
         function paymentService($http, PaymentRepository){
             var paymentTypeLabels = {};

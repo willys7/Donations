@@ -1,7 +1,7 @@
 (function () {
 'use strict';
 
-	angular.module('Donations')
+	angular.module('Donation')
         .controller('DonationController',donationController)
         .component('donationComponent',{
             templateUrl: '/views/addDonation.html',

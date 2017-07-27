@@ -1,6 +1,6 @@
 (function () {
 'use strict';
-	angular.module('Donations').factory('PaymentRepository',paymentRepository);
+	angular.module('Donation').factory('PaymentRepository',paymentRepository);
         paymentRepository.$inject = ['$http','AuthService'];
         function paymentRepository($http, AuthService){
             var repository = {
