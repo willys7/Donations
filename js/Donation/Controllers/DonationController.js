@@ -49,14 +49,9 @@
                 province : null,
                 postalCode : null
             };
+            vm.validDate = true;
 
-            for (var i=17; i<=25; i++){
-                vm.year.push(i);
-            }
-            vm.month = [];
-            for (var i=1; i<=12; i++){
-                vm.month.push(i);
-            }
+            
             
 
             getPaymentLabels();
@@ -70,6 +65,7 @@
             vm.validateCardNumber = validateCardNumber;
             vm.validatecardName = validatecardName;
             vm.validateCustomPledge = validateCustomPledge;
+            vm.validateDate = validateDate;
             vm.submitForm = submitForm;
 
             
@@ -190,8 +186,8 @@
                
             }
 
-            function submitForm(valid){
-                if(valid){
+            function submitForm(){
+                if(vm.donationForm.$valid){
                     var realDate = DonationService.DateFormat(vm.cardExpires);
                     vm.paymentDetails.formattedExpiryDate = realDate;
                     DonationService.setPaymentConfig(vm.paymentDetails)
@@ -201,6 +197,25 @@
                     vm.alert = "Invalid form please complete all the required fields";
                 }
                 
+            }
+
+            function validateDate(){
+                var selectYear = vm.cardExpires.getFullYear();
+                var selectMonth = vm.cardExpires.getMonth();
+                selectMonth = Number(selectMonth);
+                selectYear = Number(selectYear);
+                var today = new Date();
+                if(selectYear < Number(today.getFullYear()) || selectMonth < Number(today.getMonth())){
+                    vm.validDate = false;
+                    vm.donationForm.cardExpires.$setValidity("cardExpires", false);
+                }
+                else{
+                    vm.validDate = true;
+                    vm.donationForm.cardExpires.$setValidity("cardExpires", true);
+                }
+                    
+                
+
             }
 
             
